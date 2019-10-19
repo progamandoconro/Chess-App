@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Image,
   Platform,
@@ -11,43 +10,29 @@ import {
   Linking,
 } from 'react-native';
 
-
 export default function LinksScreen() {
   return (
     <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={{color: 'blue'}}
-          onPress={() => Linking.openURL('http://google.com')}>
-          Google
+          <Text style={{fontSize: 40, color: 'blue'}}
+          onPress={() => Linking.openURL('http://programandoconro.wordpress.com')}>
+          Blog and Portafolio
           </Text>
           </TouchableOpacity>
         </View>
+        
   );
 }
 
 LinksScreen.navigationOptions = {
   title: 'Developer CV', 
-
-
-  };
- 
-
-
-  function handleLearnMorePress() {
-    WebBrowser.openBrowserAsync(
-      'https://github.com/progamandoconro'
-    );
-  }
+  }; 
   
   function handleHelpPress() {
     WebBrowser.openBrowserAsync(
       'https://programandoconro.wordpress.com'
     );
   }
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
