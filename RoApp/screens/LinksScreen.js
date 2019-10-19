@@ -1,22 +1,53 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Linking,
+} from 'react-native';
 
 
 export default function LinksScreen() {
   return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      
-    </ScrollView>
+    <View style={styles.helpContainer}>
+          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+          <Text style={{color: 'blue'}}
+          onPress={() => Linking.openURL('http://google.com')}>
+          Google
+          </Text>
+          </TouchableOpacity>
+        </View>
   );
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Developer CV',
-};
+  title: 'Developer CV', 
+
+
+  };
+ 
+
+
+  function handleLearnMorePress() {
+    WebBrowser.openBrowserAsync(
+      'https://github.com/progamandoconro'
+    );
+  }
+  
+  function handleHelpPress() {
+    WebBrowser.openBrowserAsync(
+      'https://programandoconro.wordpress.com'
+    );
+  }
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {
