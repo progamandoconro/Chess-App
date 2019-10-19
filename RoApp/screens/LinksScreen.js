@@ -8,31 +8,31 @@ import {
   TouchableOpacity,
   View,
   Linking,
+  Button,
 } from 'react-native';
 
 export default function LinksScreen() {
   return (
     <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={{fontSize: 40, color: 'blue'}}
-          onPress={() => Linking.openURL('http://programandoconro.wordpress.com')}>
-          Blog and Portafolio
-          </Text>
-          </TouchableOpacity>
-        </View>
-        
+
+        <Button
+          title="Blog-Portafolio Wordpress"
+          onPress={() => Linking.openURL('http://programandoconro.wordpress.com')}
+        />
+        <View><Text></Text></View>
+        <Button
+          title="Stackoverflow"
+          onPress={() => Linking.openURL('https://stackoverflow.com/users/5948056/rodrigo-díaz-lupanow')}
+        />
+         <View><Text></Text></View>
+          <Button
+          title="Linkedin"
+          onPress={() => Linking.openURL('https://www.linkedin.com/in/rodrigo-díaz-lupanow-3ba1bb29/')}
+        />
+          
+        </View>     
   );
 }
-
-LinksScreen.navigationOptions = {
-  title: 'Developer CV', 
-  }; 
-  
-  function handleHelpPress() {
-    WebBrowser.openBrowserAsync(
-      'https://programandoconro.wordpress.com'
-    );
-  }
 
 const styles = StyleSheet.create({
   container: {
@@ -41,3 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+LinksScreen.navigationOptions = {
+  title: 'Developer CV', 
+  }; 
