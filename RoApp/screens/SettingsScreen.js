@@ -5,7 +5,7 @@ import {
   View,
   SafeAreaView,
   Text,
-  Alert,
+  Linking,
 } from 'react-native';
 import Constants from 'expo-constants';
 
