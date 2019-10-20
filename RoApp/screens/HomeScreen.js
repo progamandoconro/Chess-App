@@ -55,7 +55,7 @@ export default function HomeScreen() {
 
       <View style={styles.tabBarInfoContainer}>
         <Text style={styles.tabBarInfoText}>
-          Check out my blog and App portafolio
+          This is my React Native App to showcase my portafolio
         </Text>
 
         <View
@@ -86,8 +86,6 @@ function DevelopmentModeNotice() {
     );
   } 
 }
-
-
 
 function handleLearnMorePress() {
   WebBrowser.openBrowserAsync(
