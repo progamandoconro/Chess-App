@@ -13,15 +13,22 @@ function Separator() {
   return <View style={styles.separator} />;
 }
 
+
 export default function App() {
   return (
+    
     <SafeAreaView style={styles.container}>
-      <View>
+    
+      <View >
+      <Text style={styles.title,{fontWeight: "bold",textAlign: "center"}}>
+        PROGRAMMING EXAMPLES:
+        </Text>
         <Text style={styles.title}>
         ESP32 Server Alarm
         </Text>
         <Button
-          title="Python Code"
+          title= "Python Code"
+          color= "#3b3c8b"
           onPress={() => Linking.openURL('https://github.com/progamandoconro/ESP32-WROOM')}
         />
       </View>
@@ -31,10 +38,11 @@ export default function App() {
           Machine Learning Predictions
         </Text>
         <Button
-          title="R code"
-          color="#f194ff"
+          title= "R code"
+          color="#087af7"
           onPress={() => Linking.openURL('https://github.com/progamandoconro/Titanic-survivors')}
         />
+
       </View>
       <Separator />
       <View>
@@ -43,25 +51,52 @@ export default function App() {
         </Text>
         <Button
           title="Golang code"
-          onPress={() => Alert.openURL('https://github.com/progamandoconro/Kanji-con-Ro')}
+          color='#02d7fd'
+          onPress={() => Linking.openURL('https://github.com/progamandoconro/Kanji-con-Ro')}
         />
+        
       </View>
+     
+      <View></View>
+      <View></View><View></View>
       <Separator />
+      <View></View><View></View>
+      <View></View><View></View>
       <View>
-        <Text style={styles.title}>
-          Visit me on Facebook and Instagram
+        <Text style={styles.title,{fontWeight: "bold", textAlign: "center"}}>
+          Visit me on Facebook and Instagram !
         </Text>
-        <View style={styles.fixToText}>
-          <Button
+        <Separator />
+        <View style={{ width: "40%", alignItems:"center", marginLeft:90 }}>
+          
+          <Button 
             title="Facebook"
-            onPress={() => Alert.openURL('https://www.facebook.com/programaconro/')}
+            
+            onPress={() => Linking.openURL('https://www.facebook.com/programaconro/')}
           />
+          </View>
+          <View style={{ width: "40%", alignItems:"center", marginLeft:90 }}>
+          <Separator /> 
           <Button
             title="Instagram"
-            onPress={() => Alert.openURL('https://www.instagram.com/programaconro/')}
+            color="#f194ff"
+
+            onPress={() => Linking.openURL('https://www.instagram.com/programaconro/')}
           />
         </View>
       </View>
+      <Separator />
+      <Separator />
+
+      <View >
+ 
+ <Text  onPress={ ()=> Linking.openURL('https://github.com/progamandoconro/ReactNativeApps') } >
+   
+   Also, please check the React Native code used to make this App <Text style={styles.TextStyle} > here. </Text>  </Text>
+
+</View>
+    <Separator />
+    
     </SafeAreaView>
   );
 }
@@ -85,5 +120,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  TextStyle: {
+ 
+    color: 'blue',
+    textDecorationLine: 'underline'
+ 
+  }
 });
-
