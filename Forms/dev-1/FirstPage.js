@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, TextInput } from 'react-native';
-
+import { ScrollView } from 'react-native-gesture-handler';
  
 export default class FirstPage extends Component {
   constructor(props) {
@@ -8,16 +8,13 @@ export default class FirstPage extends Component {
     super(props);
     this.state = {
       username: '',
+      phone:'',
       email:'',
       comensales:'',
       fecha:'',
       hora:'',
       
     };
-   
-    
-  
-  
   
   }
   static navigationOptions = {
@@ -28,16 +25,25 @@ export default class FirstPage extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      
+      <ScrollView>
 
       <View style={styles.container}>
-        
+ 
         <TextInput
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
           placeholder={' Nombre: '}
           style={styles.input}
-          multiline
+          
+
+        />
+
+        <TextInput
+          value={this.state.phone}
+          onChangeText={phone => this.setState({ phone })}
+          placeholder={' Teléfono: '}
+          style={styles.input}
+          
 
         />
 
@@ -45,26 +51,24 @@ export default class FirstPage extends Component {
           value={this.state.email}
           onChangeText={email => this.setState({ email })}
           placeholder={' Email: '}
-          style={styles.input}
-          multiline
+          style={styles.input}      
 
         />
 
-<TextInput
+        <TextInput
           value={this.state.comensales}
           onChangeText={comensales => this.setState({ comensales })}
           placeholder={' Comensales: '}
           style={styles.input}
-          multiline
-
+          
         />
-
+       
         <TextInput
           value={this.state.fecha}
           onChangeText={ fecha => this.setState({ fecha })}
           placeholder={' Fecha: '}
           style={styles.input}
-          multiline
+          
 
         />
 
@@ -73,11 +77,9 @@ export default class FirstPage extends Component {
           onChangeText={hora => this.setState({ hora })}
           placeholder={' Hora: '}
           style={styles.input}
-          multiline
-
+          
         />
-        
-        
+              
         <Button
           title="Reservar"
           
@@ -86,13 +88,13 @@ export default class FirstPage extends Component {
               JSON_ListView_Clicked_Item: " Nombre: "+ this.state.username +  " Email: " + this.state.email  + " Comensales: " + this.state.comensales+ " Fecha: " + this.state.fecha+  " Hora: "+this.state.hora,
 
             })
-
             
           }
-
  
         />
+
       </View>
+      </ScrollView>
     );
   }
 }
@@ -100,15 +102,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    margin: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: 10,
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
   },
   input: {
-    width: 200,
-    height: 40,
-    padding: 10,
+    flex:1,
+    padding: 1,
     marginBottom: 10,
     backgroundColor: '#DBDBD6',
+    
   },
+  
+
 });
