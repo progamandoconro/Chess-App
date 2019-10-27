@@ -16,6 +16,10 @@ export default class SecondPage extends Component {
   render() {
     
     const { navigate } = this.props.navigation;
+
+
+
+    
    
 
     return (
@@ -49,10 +53,11 @@ export default class SecondPage extends Component {
 
         >
       
+        <TextInput>
         <Text style={styles.ItemStyle}>
           {this.props.navigation.state.params.JSON_ListView_Clicked_Item}
         </Text>
-        
+        </TextInput>
 
         </TouchableOpacity>
         
@@ -122,13 +127,13 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   ItemStyle:{
-    backgroundColor:"red"
+    backgroundColor:'white',
 
 
   },
   BigListStyle:{
     flex:1,
-    backgroundColor:'#d6d4d4',
+    backgroundColor:'white',
     alignItems:'center',
     justifyContent:'center',
     
