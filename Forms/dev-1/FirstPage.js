@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+
  
 export default class FirstPage extends Component {
   constructor(props) {
@@ -15,20 +16,39 @@ export default class FirstPage extends Component {
       hora:'',
       
     };
+   
+    
+  
+  
   
   }
   static navigationOptions = {
-    //Setting the header of the screen
-    title: 'Reservar:',
+    title:'Reservar:'
   };
  
   render() {
     const { navigate } = this.props.navigation;
     return (
+
+
+
+      <View style={{
+        flex:1,
+        backgroundColor:'#fdf2b8', 
+        position:'absolute',  
+        top: 0, left: 0, 
+        right: 0, bottom: 0, 
+        justifyContent:'center',
+        alignItems:'center'}}>
+    
       <ScrollView>
 
+
+        
       <View style={styles.container}>
- 
+
+      
+        
         <TextInput
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
@@ -51,17 +71,20 @@ export default class FirstPage extends Component {
           value={this.state.email}
           onChangeText={email => this.setState({ email })}
           placeholder={' Email: '}
-          style={styles.input}      
+          style={styles.input}
+          
 
         />
 
         <TextInput
           value={this.state.comensales}
           onChangeText={comensales => this.setState({ comensales })}
-          placeholder={' Comensales: '}
+          placeholder={' Número de Comensales:                                        '}
           style={styles.input}
           
+
         />
+
        
         <TextInput
           value={this.state.fecha}
@@ -78,8 +101,10 @@ export default class FirstPage extends Component {
           placeholder={' Hora: '}
           style={styles.input}
           
+
         />
-              
+      
+        
         <Button
           title="Reservar"
           
@@ -88,23 +113,29 @@ export default class FirstPage extends Component {
               JSON_ListView_Clicked_Item: " Nombre: "+ this.state.username +  " Email: " + this.state.email  + " Comensales: " + this.state.comensales+ " Fecha: " + this.state.fecha+  " Hora: "+this.state.hora,
 
             })
+
             
           }
+
  
         />
 
-      </View>
+
+</View>
+      
       </ScrollView>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    margin: 10,
+    padding:10,
+    backgroundColor: '#fdf2b8',
+    
     alignItems: 'stretch',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   input: {
     flex:1,
@@ -114,5 +145,10 @@ const styles = StyleSheet.create({
     
   },
   
+
+
+
+
+
 
 });

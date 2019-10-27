@@ -20,7 +20,7 @@ export default class MainPage extends Component  {
     static navigationOptions = {
 
     
-        title: 'Mis Reservas',
+        title: 'Restaurante Cactus ',
       };
       render() {
 
@@ -39,7 +39,7 @@ export default class MainPage extends Component  {
     alignItems:'center'}} > 
           <Animated.View  >
 
-          <TouchableOpacity onPress={() => this._start()}>  
+          <TouchableOpacity onPress ={() => navigate ('ThirdPage')} >  
 
           <Emoji 
           

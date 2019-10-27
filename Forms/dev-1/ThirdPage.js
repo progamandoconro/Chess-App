@@ -10,7 +10,7 @@ export default class ThirdPage extends Component {
   static navigationOptions = {
 
     
-    title: 'Mis Reservas',
+    title: 'Mis Reservas:',
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -51,11 +51,13 @@ export default class ThirdPage extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    margin: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex:1,
+    backgroundColor:'#fdf2b8', 
+    position:'absolute',  
+    top: 0, left: 0, 
+    right: 0, bottom: 0, 
+    justifyContent:'center',
+    alignItems:'center'
   },
   TextStyle: {
     fontSize: 23,

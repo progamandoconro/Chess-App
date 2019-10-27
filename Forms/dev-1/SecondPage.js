@@ -62,7 +62,11 @@ export default class SecondPage extends Component {
 
 
         </View>
-        <View>
+        <Text>   </Text>
+       
+        <View style={styles.Buttonstyle}>
+
+        
         <Button
           title="Confirmar" 
           
@@ -76,6 +80,25 @@ export default class SecondPage extends Component {
 
  
         />
+
+        <Text>   </Text>
+         
+         <Button
+          title="Cancelar" 
+          color="red"
+          
+          
+          
+          onPress={() =>
+            navigate('FirstPage')
+
+            
+          }
+
+ 
+        />
+
+
         </View>
 
       
@@ -85,11 +108,13 @@ export default class SecondPage extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    margin: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex:1,
+    backgroundColor:'#fdf2b8', 
+    position:'absolute',  
+    top: 0, left: 0, 
+    right: 0, bottom: 0, 
+    justifyContent:'center',
+    alignItems:'center',
   },
   TextStyle: {
     fontSize: 23,
@@ -103,9 +128,17 @@ const styles = StyleSheet.create({
   },
   BigListStyle:{
     flex:1,
-    backgroundColor:"grey",
+    backgroundColor:'#d6d4d4',
     alignItems:'center',
     justifyContent:'center',
+    
+
+
+  },
+
+  Buttonstyle :{
+    flexDirection:'row',
+    justifyContent: 'space-around',
 
 
   }
