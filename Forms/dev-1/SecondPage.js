@@ -18,10 +18,6 @@ export default class SecondPage extends Component {
     const { navigate } = this.props.navigation;
 
 
-
-    
-   
-
     return (
      
       <View style={styles.container}>
@@ -78,9 +74,15 @@ export default class SecondPage extends Component {
           
           
           onPress={() =>
-            navigate('ThirdPage')
-
+            navigate('ThirdPage',{
+            JSON_ListView_Clicked_Item:
             
+            <Text style={styles.ItemStyle}>
+          {this.props.navigation.state.params.JSON_ListView_Clicked_Item}
+        </Text>
+
+            }
+            )
           }
 
  

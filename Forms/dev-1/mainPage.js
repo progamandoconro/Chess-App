@@ -39,14 +39,17 @@ export default class MainPage extends Component  {
     alignItems:'center'}} > 
           <Animated.View  >
 
-          <TouchableOpacity onPress ={() => navigate ('ThirdPage')} >  
-
+          <TouchableOpacity onPress ={() => this._start()}>  
           <Emoji 
           
           name = "pizza"
           style={{fontSize: 40, textAlign:'center'}} 
           
           /> 
+
+
+          <Text style={{fontSize:30,fontStyle:'italic',textAlign:'center'}}>Contáctanos</Text> 
+          
 
           </TouchableOpacity> 
           <TouchableOpacity onPress={() => this._start()}>  
@@ -56,8 +59,11 @@ export default class MainPage extends Component  {
           style={{fontSize: 40, textAlign:'center'}} 
           
           /> 
+
+          <Text style={{fontSize:30,fontStyle:'italic',textAlign:'center'}}>Mis Reservas</Text> 
+          
           </TouchableOpacity> 
-          <TouchableOpacity onPress={() => this._start()}>  
+          <TouchableOpacity onPress ={() => navigate ('FirstPage')}>  
 
           <Emoji 
           
@@ -66,18 +72,21 @@ export default class MainPage extends Component  {
           
         
           /> 
+
+          <Text style={{fontSize:30,textAlign:'center',fontStyle:'italic'}}>Reservar:</Text> 
+
           </TouchableOpacity> 
           <TouchableOpacity onPress ={() => navigate ('FirstPage')} > 
                  
           <Emoji 
           
           name = "cactus"
-          style={{fontSize: 80, textAlign:'center'}} 
+          style={{fontSize: 60, textAlign:'center'}} 
           
           /> 
 
-          <Text style={{fontSize:40,textAlign:'center',fontStyle:'italic'}}>Cactus</Text> 
-          <Text style={{fontSize:40,fontStyle:'italic',textAlign:'center'}}>Restaurante</Text> 
+          
+          <Text style={{fontSize:40,fontStyle:'italic',textAlign:'center'}}>Cactus</Text> 
           
           
           </TouchableOpacity> 

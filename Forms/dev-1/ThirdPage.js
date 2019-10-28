@@ -22,6 +22,10 @@ export default class ThirdPage extends Component {
           Su reserva está en proceso:
         </Text>
      
+         
+        <Text style={styles.TextStyle}>
+        {this.props.navigation.state.params.JSON_ListView_Clicked_Item}
+        </Text>
         
         <Text style={styles.TextStyle}>
          
