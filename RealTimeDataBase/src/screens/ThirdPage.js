@@ -34,29 +34,28 @@ export default class ThirdPage extends Component {
         </Text>  
         <Text style={styles.TextStyle}>
         </Text>
-        <TouchableOpacity 
-         onPress={() =>
+        
+        <Button 
+        color= 'blue'
+        title= 'Enviar'
+        onPress={() =>
          {
           writeUserData(stringify(this.props.navigation.state.params.JSON_ListView_Clicked_Item))
           console.log(stringify(this.props.navigation.state.params.JSON_ListView_Clicked_Item))     
          }
-         }
-        >
-        <Text style={styles.ItemStyle}>
-          Confirmar reserva
-        </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-         onPress={() =>
+         } >
+        </Button>
+        <Text> </Text>
+        <Button 
+        color= 'orange'
+        title= 'Ir a Mis Reservas'
+        onPress={() =>
          {navigate('ForthPage')}
-         
         }
-        >
-        <Text>
-          Ir a Página de espera 
-        </Text>
-        </TouchableOpacity>
+         >
+         </Button> 
+        
+       
       </View>
       </Background>
     );
