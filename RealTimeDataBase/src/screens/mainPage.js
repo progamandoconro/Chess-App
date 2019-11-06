@@ -24,14 +24,14 @@ export default class mainPage extends Component  {
           return (
     <Background>     
           <Animated.View  >
-          <TouchableOpacity onPress ={() => this._start()}>  
+          <TouchableOpacity onPress ={() => alert("Restaurante Cactus. Tlf. 0241-8257718") }>  
           <Emoji   
           name = "pizza"
           style={{fontSize: 40, textAlign:'center'}}        
           /> 
           <Text style={{fontSize:30,fontStyle:'italic',textAlign:'center'}}>Contáctanos</Text>
           </TouchableOpacity> 
-          <TouchableOpacity onPress={() => this._start()}>  
+          <TouchableOpacity onPress={() => navigate ('ForthPage')}>  
           <Emoji 
           name = "sushi"
           style={{fontSize: 40, textAlign:'center'}} 

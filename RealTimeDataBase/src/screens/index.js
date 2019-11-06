@@ -8,4 +8,5 @@ export { default as mainPage } from './mainPage.js';
 export { default as FirstPage } from './FirstPage.js';
 export { default as SecondPage } from './SecondPage.js';
 export { default as ThirdPage } from './ThirdPage.js';
+export {default as ForthPage} from './ForthPage.js'
 

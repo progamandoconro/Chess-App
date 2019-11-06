@@ -9,7 +9,6 @@ import { stringify } from 'qs';
 if (!firebase.apps.length) {
   firebase.initializeApp(FIREBASE_CONFIG);
 }
-
 const writeUserData =(userInfo)=> {
   firebase.database().ref('users/').push({
       userInfo
@@ -23,6 +22,7 @@ const writeUserData =(userInfo)=> {
 }
 export default class ThirdPage extends Component {
   render() {    
+    const { navigate } = this.props.navigation;
     return (
       <Background>
       <View>
@@ -34,18 +34,26 @@ export default class ThirdPage extends Component {
         </Text>  
         <Text style={styles.TextStyle}>
         </Text>
-        
         <TouchableOpacity 
          onPress={() =>
          {
           writeUserData(stringify(this.props.navigation.state.params.JSON_ListView_Clicked_Item))
-          console.log(stringify(this.props.navigation.state.params.JSON_ListView_Clicked_Item))
-         
+          console.log(stringify(this.props.navigation.state.params.JSON_ListView_Clicked_Item))     
          }
+         }
+        >
+        <Text style={styles.ItemStyle}>
+          Confirmar reserva
+        </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+         onPress={() =>
+         {navigate('ForthPage')}
          
         }
         >
-        <Text style={styles.ItemStyle}>
+        <Text>
           Ir a Página de espera 
         </Text>
         </TouchableOpacity>
