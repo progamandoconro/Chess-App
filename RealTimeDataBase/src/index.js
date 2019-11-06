@@ -11,7 +11,8 @@ import {
   mainPage,
   FirstPage,
   SecondPage,
-  ThirdPage
+  ThirdPage,
+  ForthPage
 } from "./screens";
 
 const Router = createStackNavigator(
@@ -25,7 +26,8 @@ const Router = createStackNavigator(
     mainPage,
     FirstPage,
     SecondPage,
-    ThirdPage
+    ThirdPage,
+    ForthPage
   },
   {
     initialRouteName: "AuthLoadingScreen",
