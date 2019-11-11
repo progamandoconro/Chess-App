@@ -25,35 +25,6 @@ const writeUserData =(userInfo)=> {
 }
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      onListPage: true
-    };
-  }
-
-
-  /**
-   * determine if i need to show the add item modal
-   */
-  _addItem = _value => {
-    debugger;
-    this.setState(() => ({ showAddItemModal: _value }));
-  };
-
-  /**
-   * determine if the tabs have changed so I can change the buttons 
-   * in the title bar
-   */
-  _changedTabs = e => {
-    if (e.currentTarget.attributes.tab.value === "tab1") {
-      this.setState(() => ({ onListPage: true }));
-    } else {
-      this.setState(() => ({ onListPage: false }));
-    }
-  }
-  
-
   componentDidMount () {
     const nameRef = firebase.database().ref().child('usuario')
 
@@ -64,9 +35,23 @@ class HomePage extends Component {
 
     })
   }
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      onListPage: true
+    };
+  }
 
+  _changedTabs = e => {
+    if (e.currentTarget.attributes.tab.value === "tab1") {
+      this.setState(() => ({ onListPage: true }));
+    } else {
+      this.setState(() => ({ onListPage: false }));
+    }
+  }
+  
   render() {
-    let { onListPage } = this.state;
     return (
       <IonPage>
         <IonHeader>
@@ -82,12 +67,27 @@ class HomePage extends Component {
             showAddItemModal={this.state.showAddItemModal}
           />
          
-
         </IonContent>
        
         <IonContent><h1> Reservas en Firebase: {this.state.reserva}</h1> </IonContent>
-        <IonContent><h1> {writeUserData('hola2')} </h1> </IonContent>
-        <IonInput type='email' name='data'/>  
+        
+        <IonContent>
+        <div>  
+        
+        <h1>Introduzca la reserva a confirmar:</h1>
+        <input
+        
+        
+        > 
+        
+        </input> 
+        
+        </div> 
+
+        </IonContent>
+
+        <IonContent><h1> {/*writeUserData('hola2')*/} </h1> </IonContent>
+             
 
       </IonPage>
     );
