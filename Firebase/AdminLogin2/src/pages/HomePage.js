@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import firebase from 'firebase'
+import firebase from '@firebase/app'
+import '@firebase/auth'
 import {
   IonPage,
   IonContent,
   IonHeader,
-  IonButtons,
   IonToolbar,
-  IonButton,
-  IonInput
+
 } from "@ionic/react";
 
 import TabContainer from "../components/TabContainer";
@@ -25,13 +24,20 @@ const writeUserData =(userInfo)=> {
 }
 
 class HomePage extends Component {
-  componentDidMount () {
-    const nameRef = firebase.database().ref().child('usuario')
 
+
+  componentDidMount () {
+    const nameRef = firebase.database()
+    .ref('reservas')
+    
     nameRef.on('value', (snapshot)=> {
-      this.setState({
-        reserva: snapshot.val()
+      let datos = []
+      snapshot.forEach(child=>{
+        datos.push(child.val())
       })
+
+
+      this.setState({reservas: datos })
 
     })
   }
@@ -52,6 +58,9 @@ class HomePage extends Component {
   }
   
   render() {
+
+    let myData = this.state.reservas
+
     return (
       <IonPage>
         <IonHeader>
@@ -69,15 +78,15 @@ class HomePage extends Component {
          
         </IonContent>
        
-        <IonContent><h1> Reservas en Firebase: {this.state.reserva}</h1> </IonContent>
+        <IonContent> <li> {myData} </li>
+        
+         </IonContent>
         
         <IonContent>
         <div>  
         
         <h1>Introduzca la reserva a confirmar:</h1>
-        <input
-        
-        
+        <input       
         > 
         
         </input> 
@@ -86,7 +95,7 @@ class HomePage extends Component {
 
         </IonContent>
 
-        <IonContent><h1> {/*writeUserData('hola2')*/} </h1> </IonContent>
+        <IonContent><h1> {/*writeUserData('hola5')*/} </h1> </IonContent>
              
 
       </IonPage>
