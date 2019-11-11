@@ -1,6 +1,4 @@
-
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import firebase from 'firebase'
 import {
   IonPage,
@@ -8,13 +6,23 @@ import {
   IonHeader,
   IonButtons,
   IonToolbar,
-  IonButton
+  IonButton,
+  IonInput
 } from "@ionic/react";
 
-// MOBX
-import { inject, observer } from "mobx-react";
 import TabContainer from "../components/TabContainer";
-// import CatalogHeader from "../components/CatalogHeader";
+
+const writeUserData =(userInfo)=> {
+  firebase.database().ref('reservas/datos/').push({
+      userInfo
+  }).then((data)=>{
+      //success callback
+      console.log('data ' , data)
+  }).catch((error)=>{
+      //error callback
+      console.log('error ' , error)
+  })
+}
 
 class HomePage extends Component {
   constructor(props) {
@@ -24,21 +32,30 @@ class HomePage extends Component {
     };
   }
 
+
+  /**
+   * determine if i need to show the add item modal
+   */
   _addItem = _value => {
     debugger;
     this.setState(() => ({ showAddItemModal: _value }));
   };
 
+  /**
+   * determine if the tabs have changed so I can change the buttons 
+   * in the title bar
+   */
   _changedTabs = e => {
     if (e.currentTarget.attributes.tab.value === "tab1") {
       this.setState(() => ({ onListPage: true }));
     } else {
       this.setState(() => ({ onListPage: false }));
     }
-  };
+  }
+  
 
   componentDidMount () {
-    const nameRef = firebase.database().ref().child('reservas').child('datos')
+    const nameRef = firebase.database().ref().child('usuario')
 
     nameRef.on('value', (snapshot)=> {
       this.setState({
@@ -54,17 +71,7 @@ class HomePage extends Component {
       <IonPage>
         <IonHeader>
           <IonToolbar color="primary">
-            {onListPage ? (
-              <IonButtons slot="end">
-                <IonButton
-                  onClick={e => {
-                    this.setState(() => ({ showAddItemModal: true }));
-                  }}
-                >
-                  ADD ITEM
-                </IonButton>
-              </IonButtons>
-            ) : null}
+           
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -75,15 +82,16 @@ class HomePage extends Component {
             showAddItemModal={this.state.showAddItemModal}
           />
          
+
         </IonContent>
        
         <IonContent><h1> Reservas en Firebase: {this.state.reserva}</h1> </IonContent>
-        <IonContent><h1> </h1> </IonContent>
-        <IonContent><h1> </h1>  </IonContent>
+        <IonContent><h1> {writeUserData('hola2')} </h1> </IonContent>
+        <IonInput type='email' name='data'/>  
 
       </IonPage>
     );
   }
 }
 
-export default withRouter(inject("store")(observer(HomePage)));
+export default HomePage
