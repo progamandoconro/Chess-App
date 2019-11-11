@@ -1,6 +1,7 @@
+
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
+import firebase from 'firebase'
 import {
   IonPage,
   IonContent,
@@ -23,19 +24,11 @@ class HomePage extends Component {
     };
   }
 
-
-  /**
-   * determine if i need to show the add item modal
-   */
   _addItem = _value => {
     debugger;
     this.setState(() => ({ showAddItemModal: _value }));
   };
 
-  /**
-   * determine if the tabs have changed so I can change the buttons 
-   * in the title bar
-   */
   _changedTabs = e => {
     if (e.currentTarget.attributes.tab.value === "tab1") {
       this.setState(() => ({ onListPage: true }));
@@ -43,6 +36,17 @@ class HomePage extends Component {
       this.setState(() => ({ onListPage: false }));
     }
   };
+
+  componentDidMount () {
+    const nameRef = firebase.database().ref().child('reservas').child('datos')
+
+    nameRef.on('value', (snapshot)=> {
+      this.setState({
+        reserva: snapshot.val()
+      })
+
+    })
+  }
 
   render() {
     let { onListPage } = this.state;
@@ -70,9 +74,13 @@ class HomePage extends Component {
             addItem={this._addItem}
             showAddItemModal={this.state.showAddItemModal}
           />
+         
         </IonContent>
+       
+        <IonContent><h1> Reservas en Firebase: {this.state.reserva}</h1> </IonContent>
+        <IonContent><h1> </h1> </IonContent>
+        <IonContent><h1> </h1>  </IonContent>
 
-        <h5> hello world</h5>
       </IonPage>
     );
   }
