@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import firebase from '@firebase/app'
-import '@firebase/auth'
 import {
   IonPage,
   IonContent,
@@ -8,15 +6,13 @@ import {
   IonToolbar,
 
 } from "@ionic/react";
-
 import TabContainer from "../components/TabContainer";
+import firebase from '@firebase/app'
+import { stringify } from "querystring";
 
 const writeUserData =(userInfo)=> {
-  firebase.database().ref('reservas/datos/').push({
+  firebase.database().ref('reservas').push({
       userInfo
-  }).then((data)=>{
-      //success callback
-      console.log('data ' , data)
   }).catch((error)=>{
       //error callback
       console.log('error ' , error)
@@ -24,21 +20,16 @@ const writeUserData =(userInfo)=> {
 }
 
 class HomePage extends Component {
-
-
   componentDidMount () {
     const nameRef = firebase.database()
     .ref('reservas')
     
-    nameRef.on('value', (snapshot)=> {
+    nameRef.once('value', (snapshot)=> {
       let datos = []
       snapshot.forEach(child=>{
         datos.push(child.val())
       })
-
-
       this.setState({reservas: datos })
-
     })
   }
   
@@ -78,7 +69,7 @@ class HomePage extends Component {
          
         </IonContent>
        
-        <IonContent> <li> {myData} </li>
+        <IonContent> <li> {JSON.stringify( myData)} </li>
         
          </IonContent>
         
@@ -86,18 +77,14 @@ class HomePage extends Component {
         <div>  
         
         <h1>Introduzca la reserva a confirmar:</h1>
-        <input       
+        <input        
         > 
-        
         </input> 
-        
         </div> 
 
         </IonContent>
 
-        <IonContent><h1> {/*writeUserData('hola5')*/} </h1> </IonContent>
-             
-
+        <IonContent><h1> {writeUserData('hola5')} </h1> </IonContent>
       </IonPage>
     );
   }
