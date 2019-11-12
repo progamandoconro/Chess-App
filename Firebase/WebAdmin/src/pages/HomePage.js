@@ -20,21 +20,31 @@ const writeUserData =(userInfo)=> {
 }
 
 class HomePage extends Component {
-  componentDidMount () {
-    const nameRef = firebase.database().ref('reservas')
-    nameRef.once('value', (snapshot)=> {
-      this.setState({reservas: snapshot.val()})
-      
-    })          
-  }
-  
+
   constructor(props) {
     super(props);
     this.state = {
       onListPage: true,
-      username:[]
+      username:[],
+      reservas:[]
+      
     };
   }
+
+  componentWillUpdate () {
+
+    const readUsersData = ()=> {
+      const nameRef =  firebase.database().ref('reservas')
+      nameRef.on('value', (snapshot)=> {
+        const state = snapshot.val()
+        this.state.reservas =  state
+    })
+    
+    }
+    
+    readUsersData()
+    
+    }
 
   _changedTabs = e => {
     if (e.currentTarget.attributes.tab.value === "tab1") {
@@ -43,10 +53,11 @@ class HomePage extends Component {
       this.setState(() => ({ onListPage: false }));
     }
   }
-  
-  render() {
 
-    let myData = this.state.reservas
+
+  render() {
+    
+    const myData = this.state.reservas
 
     return (
       <IonPage>
@@ -76,10 +87,6 @@ class HomePage extends Component {
          onClick={writeUserData(JSON.stringify( this.state.username))}
          > Enviar </IonButton> 
         </IonContent>
-
-       
-
-       
       
       </IonPage>
     );
