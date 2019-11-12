@@ -5,6 +5,7 @@ import {
   IonHeader,
   IonToolbar,
   IonButton,
+  IonInput,
 
 } from "@ionic/react";
 import TabContainer from "../components/TabContainer";
@@ -32,7 +33,7 @@ class HomePage extends Component {
   }
 
   componentWillUpdate () {
-
+    
     const readUsersData = ()=> {
       const nameRef =  firebase.database().ref('reservas')
       nameRef.on('value', (snapshot)=> {
@@ -54,11 +55,10 @@ class HomePage extends Component {
     }
   }
 
-
   render() {
     
-    const myData = this.state.reservas
-
+  const myData = this.state.reservas
+  const pushData = (username)  => this.setState({username })
     return (
       <IonPage>
         <IonHeader>
@@ -79,15 +79,23 @@ class HomePage extends Component {
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
        
-          <input onChange={username => this.setState({ username })} > 
+          <input 
+          type='text'
+          onDurationChange= {pushData}
+          
+           > 
           </input>  
 
         <IonButton
-         title="Enviar"
+         
          onClick={writeUserData(JSON.stringify( this.state.username))}
+         > Escribir </IonButton> 
+          <IonButton
+         onClick={send => pushData(send)}
          > Enviar </IonButton> 
-        </IonContent>
-      
+
+         <IonInput/>
+         </IonContent>
       </IonPage>
     );
   }
