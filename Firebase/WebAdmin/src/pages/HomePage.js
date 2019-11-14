@@ -22,29 +22,28 @@ const writeUserData =(userInfo)=> {
 
 class HomePage extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       onListPage: true,
       username:[],
-      reservas:[]
-      
+      reservas:[],
+      value: '',
+
     };
   }
 
   componentWillUpdate () {
-    
-    const readUsersData = ()=> {
+
+      const readUsersData = ()=> {
       const nameRef =  firebase.database().ref('reservas')
       nameRef.on('value', (snapshot)=> {
         const state = snapshot.val()
         this.state.reservas =  state
     })
-    
+
     }
-    
     readUsersData()
-    
     }
 
   _changedTabs = e => {
@@ -56,14 +55,19 @@ class HomePage extends Component {
   }
 
   render() {
-    
+
   const myData = this.state.reservas
-  const pushData = (username)  => this.setState({username })
+  const pushData = (username)  => {
+    this.setState({username })
+    }
+
+    const user = this.state.username
+
     return (
       <IonPage>
         <IonHeader>
           <IonToolbar color="primary">
-           
+
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -74,24 +78,27 @@ class HomePage extends Component {
             showAddItemModal={this.state.showAddItemModal}
           />
          </IonContent>
-        
+
         <IonContent> <li> {JSON.stringify({myData})} </li></IonContent>
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
-       
+
           <input 
-          type='text'
-          onDurationChange= {pushData}
-          
+            onChange={e=>this.setState({value: e.target.value})}
+            value={this.state.value}
+            onBlur={()=>pushData(this.state.value)}
            > 
           </input>  
 
         <IonButton
-         
-         onClick={writeUserData(JSON.stringify( this.state.username))}
+
+         onClick={writeUserData( JSON.stringify(user) )}
+
          > Escribir </IonButton> 
           <IonButton
-         onClick={send => pushData(send)}
+         onClick={
+          send => pushData(send)     
+         }
          > Enviar </IonButton> 
 
          <IonInput/>
