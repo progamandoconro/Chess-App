@@ -66,18 +66,7 @@ class HomePage extends Component {
 
           </IonToolbar>
         </IonHeader>
-        <IonContent>
-          <TabContainer
-            history={this.props.history}
-            changedTabs={e => this._changedTabs(e)}
-            
-          />
-         </IonContent>
 
-        <IonContent>
-         
-         <table> {tabla}  </table>
-         </IonContent>
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
 
@@ -95,9 +84,19 @@ class HomePage extends Component {
           }}
         
          > Enviar </IonButton> 
-
-         <IonInput/>
+        
          </IonContent>
+
+        <IonContent>
+          <TabContainer
+            history={this.props.history}
+            changedTabs={e => this._changedTabs(e)}
+            
+          />
+                  
+         <table> {tabla}  </table>
+         </IonContent>
+       
       </IonPage>
     );
   }
