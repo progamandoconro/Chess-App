@@ -55,13 +55,10 @@ class HomePage extends Component {
   }
 
   render() {
-
-  const reservas = this.state.reservas
   const pushData = (data)  => {
     this.setState({data })
     }
-
-    const data = this.state.data
+    const tabla = JSON.stringify(this.state.reservas)
 
     return (
       <IonPage>
@@ -79,21 +76,26 @@ class HomePage extends Component {
           />
          </IonContent>
 
-        <IonContent> <li> {JSON.stringify({reservas})} </li></IonContent>
+        <IonContent>
+         
+         <table> {tabla.split()}  </table>
+         </IonContent>
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
 
           <input 
-            onChange={e=>this.setState({value: e.target.value})}
-            value={this.state.value}     
+            onChange={ e=> this.setState({value: e.target.value})}
+            value={this.state.value}
+                  
            > 
           </input>  
           <IonButton
           onClick= {()=>{
-            writeAdminData( JSON.stringify(data) ) ;
-            pushData(this.state.value) 
+            pushData(this.state.value) ;
+            writeAdminData( JSON.stringify(this.state.value) ) ;
             
           }}
+        
          > Enviar </IonButton> 
 
          <IonInput/>
