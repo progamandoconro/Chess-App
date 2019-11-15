@@ -59,7 +59,6 @@ class HomePage extends Component {
     this.setState({data })
     }
     const tabla = JSON.stringify(this.state.reservas)
-
     return (
       <IonPage>
         <IonHeader>
@@ -71,14 +70,13 @@ class HomePage extends Component {
           <TabContainer
             history={this.props.history}
             changedTabs={e => this._changedTabs(e)}
-            addItem={this._addItem}
-            showAddItemModal={this.state.showAddItemModal}
+            
           />
          </IonContent>
 
         <IonContent>
          
-         <table> {tabla.split()}  </table>
+         <table> {tabla}  </table>
          </IonContent>
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
