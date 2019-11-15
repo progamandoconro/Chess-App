@@ -26,7 +26,7 @@ class HomePage extends Component {
     super();
     this.state = {
       onListPage: true,
-      username:[],
+      data:[],
       reservas:[],
       value: '',
 
@@ -57,11 +57,11 @@ class HomePage extends Component {
   render() {
 
   const myData = this.state.reservas
-  const pushData = (username)  => {
-    this.setState({username })
+  const pushData = (data)  => {
+    this.setState({data })
     }
 
-    const user = this.state.username
+    const data = this.state.data
 
     return (
       <IonPage>
@@ -85,20 +85,15 @@ class HomePage extends Component {
 
           <input 
             onChange={e=>this.setState({value: e.target.value})}
-            value={this.state.value}
-            onBlur={()=>pushData(this.state.value)}
+            value={this.state.value}     
            > 
           </input>  
-
-        <IonButton
-
-         onClick={writeUserData( JSON.stringify(user) )}
-
-         > Escribir </IonButton> 
           <IonButton
-         onClick={
-          send => pushData(send)     
-         }
+          onClick= {()=>{
+            writeUserData( JSON.stringify(data) ) ;
+            pushData(this.state.value) 
+            
+          }}
          > Enviar </IonButton> 
 
          <IonInput/>
