@@ -2,12 +2,7 @@ import React from "react";
 
 import TabOnePage from "../pages/TabOnePage";
 import TabTwoPage from "../pages/TabTwoPage";
-import { IonTabs } from "@ionic/react";
 
-//
-// value is used to let us know what view to render
-//
-// 0 = SHOES, 1 = SOCKS, 2 = CART
 const TabContainer = ({ history, changedTabs, addItem , showAddItemModal}) => {
   return (
     <ion-tabs
@@ -18,8 +13,7 @@ const TabContainer = ({ history, changedTabs, addItem , showAddItemModal}) => {
       <ion-tab tab="tab1">
         <TabOnePage
           history={history}
-          addItem={addItem}
-          showAddItemModal={showAddItemModal}
+          
         />
       </ion-tab>
       <ion-tab tab="tab2">
