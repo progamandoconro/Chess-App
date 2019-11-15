@@ -11,7 +11,7 @@ import {
 import TabContainer from "../components/TabContainer";
 import firebase from '@firebase/app'
 
-const writeUserData =(userInfo)=> {
+const writeAdminData =(userInfo)=> {
   firebase.database().ref('reservas').push({
       userInfo
   }).catch((error)=>{
@@ -56,7 +56,7 @@ class HomePage extends Component {
 
   render() {
 
-  const myData = this.state.reservas
+  const reservas = this.state.reservas
   const pushData = (data)  => {
     this.setState({data })
     }
@@ -79,7 +79,7 @@ class HomePage extends Component {
           />
          </IonContent>
 
-        <IonContent> <li> {JSON.stringify({myData})} </li></IonContent>
+        <IonContent> <li> {JSON.stringify({reservas})} </li></IonContent>
         <h1>Introduzca la reserva a confirmar:</h1>
         <IonContent>
 
@@ -90,7 +90,7 @@ class HomePage extends Component {
           </input>  
           <IonButton
           onClick= {()=>{
-            writeUserData( JSON.stringify(data) ) ;
+            writeAdminData( JSON.stringify(data) ) ;
             pushData(this.state.value) 
             
           }}
