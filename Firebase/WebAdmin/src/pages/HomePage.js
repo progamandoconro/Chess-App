@@ -5,7 +5,8 @@ import {
   IonHeader,
   IonToolbar,
   IonButton,
-  IonInput,
+  IonFooter,
+
 
 } from "@ionic/react";
 import TabContainer from "../components/TabContainer";
@@ -60,6 +61,7 @@ class HomePage extends Component {
     }
     const tabla = JSON.stringify(this.state.reservas)
     return (
+      
       <IonPage>
         <IonHeader>
           <IonToolbar color="primary">
@@ -68,7 +70,9 @@ class HomePage extends Component {
         </IonHeader>
 
         <h1>Introduzca la reserva a confirmar:</h1>
-        <IonContent>
+        
+        <IonContent
+        >
 
           <input 
             onChange={ e=> this.setState({value: e.target.value})}
@@ -76,30 +80,33 @@ class HomePage extends Component {
                   
            > 
           </input>  
+
           <IonButton
           onClick= {()=>{
             pushData(this.state.value) ;
-            writeAdminData( JSON.stringify(this.state.value) ) ;
+            writeAdminData( JSON.stringify(this.state.value).replace(/["{[,\}\]]/g, "") ) ;
             
           }}
         
          > Enviar </IonButton> 
-        
-         </IonContent>
 
+          </IonContent>
+          <IonContent>
+          
+            <table> {tabla}  </table>
+        
+         </IonContent>         
         <IonContent>
           <TabContainer
             history={this.props.history}
             changedTabs={e => this._changedTabs(e)}
-            
-          />
-                  
-         <table> {tabla}  </table>
-         </IonContent>
-       
+            />
+       </IonContent>
       </IonPage>
+      
     );
   }
 }
 
 export default HomePage
+
