@@ -54,32 +54,23 @@ class HomePage extends Component {
   }
 
   render() {
-
+    
     const pushAdminData = (data)  => {
       this.setState({data })
     }
-
     const reservas =  JSON.stringify(this.state.reservas)
-    const tabla = reservas.split (',').map ((item, i) => <p key={i}>{item}</p>);
+    const tabla =  reservas.split (',').map ((item, i) => <p key={i}>{item}</p>)
 
     return (
       
       <IonPage>
         <IonHeader>
           <IonToolbar color="primary">
-
-          </IonToolbar>
-        </IonHeader>
-
+          </IonToolbar>       
         <h1>Introduzca la reserva a confirmar:</h1>
-        
-        <IonContent
-        >
-
           <input 
             onChange={ e=> this.setState({value: e.target.value})}
-            value={this.state.value}
-                  
+            value={this.state.value}     
            > 
           </input>  
 
@@ -89,27 +80,21 @@ class HomePage extends Component {
             writeAdminData( JSON.stringify(this.state.value).replace(/["{[,\}\]]/g, "") ) ;
             
           }}
+         > Enviar 
+         </IonButton>           
+         </IonHeader>        
         
-         > Enviar </IonButton> 
-
-          </IonContent>
-        
-          <IonContent>
+          <IonContent >
+           
             <IonList> {tabla.reverse()}  </IonList>   
-         </IonContent>
-        
-        <IonContent >
          
           <TabContainer
             history={this.props.history}
             changedTabs={e => this._changedTabs(e)}
-            
-          />
-                  
+            />
+              
        </IonContent>
-       
       </IonPage>
-      
     );
   }
 }
