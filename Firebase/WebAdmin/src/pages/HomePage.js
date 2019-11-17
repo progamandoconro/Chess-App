@@ -95,7 +95,7 @@ class HomePage extends Component {
           </IonContent>
         
           <IonContent>
-            <IonList> {tabla}  </IonList>   
+            <IonList> {tabla.reverse()}  </IonList>   
          </IonContent>
         
         <IonContent >
