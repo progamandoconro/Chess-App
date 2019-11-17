@@ -5,8 +5,7 @@ import {
   IonHeader,
   IonToolbar,
   IonButton,
-  IonFooter,
-
+  IonList,
 
 } from "@ionic/react";
 import TabContainer from "../components/TabContainer";
@@ -29,7 +28,7 @@ class HomePage extends Component {
       onListPage: true,
       data:[],
       reservas:[],
-      value: '',
+      value:  [],
 
     };
   }
@@ -42,7 +41,6 @@ class HomePage extends Component {
         const state = snapshot.val()
         this.state.reservas =  state
     })
-
     }
     readUsersData()
     }
@@ -56,10 +54,14 @@ class HomePage extends Component {
   }
 
   render() {
-  const pushData = (data)  => {
-    this.setState({data })
+
+    const pushAdminData = (data)  => {
+      this.setState({data })
     }
-    const tabla = JSON.stringify(this.state.reservas)
+
+    const reservas =  JSON.stringify(this.state.reservas)
+    const tabla = reservas.split (',').map ((item, i) => <p key={i}>{item}</p>);
+
     return (
       
       <IonPage>
@@ -83,7 +85,7 @@ class HomePage extends Component {
 
           <IonButton
           onClick= {()=>{
-            pushData(this.state.value) ;
+            pushAdminData(this.state.value) ;
             writeAdminData( JSON.stringify(this.state.value).replace(/["{[,\}\]]/g, "") ) ;
             
           }}
@@ -91,17 +93,21 @@ class HomePage extends Component {
          > Enviar </IonButton> 
 
           </IonContent>
-          <IonContent>
-          
-            <table> {tabla}  </table>
         
-         </IonContent>         
-        <IonContent>
+          <IonContent>
+            <IonList> {tabla}  </IonList>   
+         </IonContent>
+        
+        <IonContent >
+         
           <TabContainer
             history={this.props.history}
             changedTabs={e => this._changedTabs(e)}
-            />
+            
+          />
+                  
        </IonContent>
+       
       </IonPage>
       
     );
