@@ -8,11 +8,8 @@ constructor (){
   this.state = {
     fecha:''
   }
-
 };
-
 render(){
-
   return (
 <div className='App'>
 	<header className='App-header'>
@@ -23,11 +20,9 @@ render(){
           alert(this.state.fecha)}
           }
           > Enviar </button>
-
 	</header>
 </div>
   )
-
 }
 };
 export default App;
