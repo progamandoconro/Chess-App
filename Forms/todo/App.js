@@ -5,78 +5,102 @@ class  App extends React.Component {
   constructor (){
     super()
     this.state = {
-      data: []
+      data: [],
     }
   }
   render(){
     const todo =  this.state.data
     
     const handleChange = (data) => {
-      this.setState({data: data.target.value})
+      this.setState ({data: data.target.value}) 
       console.log(todo)
+      
+      return(
+        
+        <button 
+        className = 'Delete-Button'
+        onClick = {handleChange}
+        > 
+        Delete
+        </button>
+        )
+        
+      }
+      
+      const handleClick = () => {
+        this.setState({data: todo})
+        console.log(todo)
+        alert(todo)
+      }
+      
+      
+      return (
+        
+        <div className="App">
+        <header className="App-header">
+        <div className="Input-box"> 
+        
+        <div className="Item">
+        <p>
+        {todo}
+        </p>
+        
+        
+        </div>
+        
+        
+        </div>
+        
+        <hr></hr>
+        
+        
+        <div className="Input-Form" > 
+        <form onSubmit={handleChange}>
+        <input 
+        onChange = {e=> handleChange(e) }
+        value = {this.state.data}
+        
+        >
+        </input>
+        <hr></hr>
+        
+        </form>
+        </div>
+        
+        <div> 
+        
+        <button 
+        className = 'Send-Button'
+        onClick = {handleClick}
+        
+        > 
+        Send 
+        </button>
+        <text> </text>
+        
+        <button 
+        className = 'Save-Button'
+        onClick = ''
+        > 
+        Save
+        </button>
+        
+        <text> </text>
+        
+        <button 
+        className = 'Delete-Button'
+        onClick = {handleChange}
+        > 
+        Delete
+        </button>
+        
+        </div>
+        </header>
+        
+        </div>
+        
+        );
+      }
     }
+    export default App;
     
-    const handleClick = () => {
-      this.setState({data: todo})
-      console.log(todo)
-      alert(todo)
-    }
-    
-    const item = Object.assign (todo)
-    
-    return (
-      
-      <div className="App">
-      <header className="App-header">
-      
-      
-      <div className="Ro-name"> 
-      
-      <p>
-      {todo}
-      </p>
-      
-      <p>
-      {item}
-      </p>
-      
-      </div>
-      
-      <div className="Input-Form" > 
-      <form onSubmit={handleChange}>
-      <input 
-      onChange = { handleChange }
-      value = {this.state.value}
-      
-      >
-      </input>
-      </form>
-      </div>
-      
-      <div> 
-      <button 
-      className = 'Send-Button'
-      onClick = {handleClick}
-      
-      > 
-      Send 
-      </button>
-      
-      <button 
-      className = 'Send-Button'
-      onClick = {handleChange}
-      style={{color:'red'}}
-      > 
-      Delete
-      </button>
-      
-      </div>
-      </header>
-      
-      </div>
-      
-      );
-    }
-  }
-  export default App;
-  
