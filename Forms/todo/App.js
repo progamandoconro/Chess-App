@@ -6,11 +6,12 @@ class  App extends React.Component {
     super()
     this.state = {
       data: '',
-      list: []
+      list: [],
+      id: 1
+      
     }
     this.handleChange.bind();
-    this.handleKeyDown.bind();
-    
+    this.handleKeyDown.bind(); 
   }
   
   handleChange (data) {
@@ -30,18 +31,29 @@ class  App extends React.Component {
     
     const todo = this.state.data;
     
+    const id = this.state.id;
+    
     const handleClick = (item) => {
       let myList = this.state.list ;
       myList.push(item);
-      
       this.setState ({
         list: myList,
-        data: ''
-        
+        data: '',
+        id: id + 1
       });
-      
-      console.log(myList);
+      console.log(this.state.id)
     }
+    const removeItem= ()=> {
+      
+      let newList= this.state.list 
+      
+      this.setState ({
+        list: newList.slice(id-1),
+        id: id-1
+      })
+      
+      console.log(this.state.id)
+    }    
     
     return (
       
@@ -86,8 +98,16 @@ class  App extends React.Component {
       </div>
       
       <ul className="Input-box" >
-      {this.state.list.map(val=> <li> {val} </li>)}
+      {this.state.list.map(val=> <li> {val}   </li>)}
       </ul>
+      <button 
+      style={{color:'red'}}
+      onClick={removeItem}
+      
+      > 
+      <span role="img"> ✔️ </span>  
+      
+      </button> 
       </header>      
       </div>
       
