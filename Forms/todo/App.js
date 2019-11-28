@@ -6,9 +6,17 @@ class  App extends React.Component {
     super()
     this.state = {
       data: [],
+      list: []
     }
-    this.handleKeyDown.bind();
     this.handleChange.bind();
+    this.handleKeyDown.bind();
+    
+  }
+  
+  handleChange (data) {
+    this.setState ({data: data.target.value}) ;
+    console.log(data.target.value);
+    
   }
   
   handleKeyDown(event) {
@@ -18,34 +26,31 @@ class  App extends React.Component {
     }
   }
   
-  handleChange (data) {
-    this.setState ({data: data.target.value}) ;
-    console.log(data.target.value);
-    
-  }
-  
   render(){
     
     const todo = this.state.data;
-  
-    const handleClick = () => {
-      this.setState({data: todo});
-      console.log(todo);
-      alert(todo);
+    
+    const handleClick = (item) => {
+      let myList = this.state.list ;
+      myList.push(item);
+      
+      this.setState ({
+        list: myList
+        
+      });
+      
+      console.log(myList);
     }
     
     return (
       
       <div className="App">
       <header className="App-header">
-      <div className="Input-box"> 
-      
-      <div className="Item">
+      <div > 
       <p>
       {todo}
       </p>
       </div>  
-      </div>
       
       <hr></hr>
       <div className="Input-Form" > 
@@ -58,24 +63,13 @@ class  App extends React.Component {
       >
       </input>
       <hr></hr>
-      
       </form>
       </div>
-      
       <div> 
-      
-      <button 
-      className = 'Send-Button'
-      onClick = {handleClick}
-      
-      > 
-      Send 
-      </button>
       <text> </text>
-      
       <button 
       className = 'Save-Button'
-      onClick = ''
+      onClick = {()=>handleClick(this.state.data)}
       > 
       Save
       </button>
@@ -90,12 +84,16 @@ class  App extends React.Component {
       </button>
       
       </div>
-      </header>
       
+      <p className="Input-box" >
+      {this.state.list}
+      </p>
+      </header>      
       </div>
       
       );
     }
   }
+  
   export default App;
   
