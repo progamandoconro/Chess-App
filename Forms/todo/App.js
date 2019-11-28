@@ -5,7 +5,7 @@ class  App extends React.Component {
   constructor (){
     super()
     this.state = {
-      data: [],
+      data: '',
       list: []
     }
     this.handleChange.bind();
@@ -35,7 +35,8 @@ class  App extends React.Component {
       myList.push(item);
       
       this.setState ({
-        list: myList
+        list: myList,
+        data: ''
         
       });
       
@@ -52,7 +53,6 @@ class  App extends React.Component {
       </p>
       </div>  
       
-      <hr></hr>
       <div className="Input-Form" > 
       <form >
       <input 
@@ -85,9 +85,9 @@ class  App extends React.Component {
       
       </div>
       
-      <p className="Input-box" >
-      {this.state.list}
-      </p>
+      <ul className="Input-box" >
+      {this.state.list.map(val=> <li> {val} </li>)}
+      </ul>
       </header>      
       </div>
       
