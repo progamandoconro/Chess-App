@@ -13,18 +13,7 @@ class  App extends React.Component {
     
     const handleChange = (data) => {
       this.setState ({data: data.target.value}) 
-      console.log(todo)
-      
-      return(
-        
-        <button 
-        className = 'Delete-Button'
-        onClick = {handleChange}
-        > 
-        Delete
-        </button>
-        )
-        
+      console.log(todo)        
       }
       
       const handleClick = () => {
@@ -33,33 +22,24 @@ class  App extends React.Component {
         alert(todo)
       }
       
-      
       return (
         
         <div className="App">
         <header className="App-header">
-        <div className="Input-box"> 
-        
+        <div className="Input-box">       
         <div className="Item">
         <p>
         {todo}
         </p>
-        
-        
         </div>
-        
-        
-        </div>
-        
-        <hr></hr>
-        
+        </div>    
+        <hr></hr>    
         
         <div className="Input-Form" > 
         <form onSubmit={handleChange}>
         <input 
         onChange = {e=> handleChange(e) }
-        value = {this.state.data}
-        
+        value = {this.state.data}       
         >
         </input>
         <hr></hr>
@@ -67,8 +47,7 @@ class  App extends React.Component {
         </form>
         </div>
         
-        <div> 
-        
+        <div>    
         <button 
         className = 'Send-Button'
         onClick = {handleClick}
@@ -92,13 +71,10 @@ class  App extends React.Component {
         onClick = {handleChange}
         > 
         Delete
-        </button>
-        
+        </button>       
         </div>
-        </header>
-        
-        </div>
-        
+        </header>  
+        </div>       
         );
       }
     }
