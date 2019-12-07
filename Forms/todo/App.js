@@ -7,113 +7,94 @@ class  App extends React.Component {
     this.state = {
       data: '',
       list: [],
-      id: 1
+      id: 0
       
     }
     this.handleChange.bind();
     this.handleKeyDown.bind(); 
   }
-  
   handleChange (data) {
-    this.setState ({data: data.target.value}) ;
-    console.log(data.target.value);
-    
-  }
-  
+    this.setState ({data: data.target.value});  
+  };
   handleKeyDown(event) {
     if (event.keyCode === 13) {
       event.preventDefault(); 
       event.stopPropagation();
     }
-  }
+  };
   
   render(){
-    
     const todo = this.state.data;
-    
+    const newList= this.state.list ;
     const id = this.state.id;
-    
+    const removeItem=(index)=> {
+      const list = this.state.list;
+      list.splice(index, 1);
+      this.setState({ list });
+    };
     const handleClick = (item) => {
-      let myList = this.state.list ;
-      myList.push(item);
+      newList.push(item);        
       this.setState ({
-        list: myList,
-        data: '',
-        id: id + 1
-      });
-      console.log(this.state.id)
-    }
-    const removeItem= ()=> {
-      
-      let newList= this.state.list 
-      
-      this.setState ({
-        list: newList.slice(id-1),
-        id: id-1
-      })
-      
-      console.log(this.state.id)
-    }    
-    
-    return (
-      
-      <div className="App">
-      <header className="App-header">
-      <div > 
-      <p>
-      {todo}
-      </p>
-      </div>  
-      
-      <div className="Input-Form" > 
-      <form >
-      <input 
-      onChange = {e=> this.handleChange(e)}
-      value = {todo}
-      onKeyDown={this.handleKeyDown}
-      
-      >
-      </input>
-      <hr></hr>
-      </form>
-      </div>
-      <div> 
-      <text> </text>
-      <button 
-      className = 'Save-Button'
-      onClick = {()=>handleClick(this.state.data)}
-      > 
-      Save
-      </button>
-      
-      <text> </text>
-      
-      <button 
-      className = 'Delete-Button'
-      onClick = {e=>this.handleChange(e)}
-      > 
-      Delete
-      </button>
-      
-      </div>
-      
-      <ul className="Input-box" >
-      {this.state.list.map(val=> <li> {val}   </li>)}
-      </ul>
-      <button 
+        results:{
+          list:  newList.map(e=>[e,Math.random()]),
+          data: '',
+          id:id+1,
+        }
+      });     
+      console.log(this.state.results);
+    };
+    const showTable =  newList.map(val=> <li> <h3> {val} {<button 
       style={{color:'red'}}
-      onClick={removeItem}
-      
+      onClick={removeItem}      
       > 
-      <span role="img"> ✔️ </span>  
+      <span role="img"> Remove  ✔️ </span>  
+      </button> }</h3> </li>);  
       
-      </button> 
-      </header>      
-      </div>
-      
-      );
-    }
-  }
-  
-  export default App;
-  
+      return (
+        <div className="App">
+        <div>
+        </div>
+        <header className="App-header">
+        <div > 
+        <p>
+        {todo}
+        </p>
+        </div>  
+        <div className="Input-Form" > 
+        <form >
+        <input 
+        onChange = {e=> this.handleChange(e)}
+        value = {todo}
+        onKeyDown={this.handleKeyDown}
+        >
+        </input>
+        <hr></hr>
+        </form>
+        </div>
+        <div> 
+        <text> </text>
+        <button 
+        className = 'Save-Button'
+        onClick = {()=>handleClick(this.state.data)}
+        > 
+        Save
+        </button>
+        <text> </text>   
+        <button 
+        className = 'Delete-Button'
+        onClick = {e=>this.handleChange(e)}
+        > 
+        Clear
+        </button>
+        </div>
+        <ul className="Input-box" >
+        {showTable}
+        </ul> 
+        </header>    
+        </div>      
+        );
+      }
+    };
+    
+    export default App;
+    
