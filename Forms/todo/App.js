@@ -52,17 +52,14 @@ class  App extends React.Component {
       
       return (
         <div className="App">
-        <div>
-        </div>
-        <header className="App-header">
-        <div > 
-        <p>
+        <div className="App-header">
+        <p className="Input-todo">
         {todo}
-        </p>
-        </div>  
+        </p> 
         <div className="Input-Form" > 
         <form >
         <input 
+    
         onChange = {e=> this.handleChange(e)}
         value = {todo}
         onKeyDown={this.handleKeyDown}
@@ -90,7 +87,7 @@ class  App extends React.Component {
         <ul className="Input-box" >
         {showTable}
         </ul> 
-        </header>    
+       </div>
         </div>      
         );
       }

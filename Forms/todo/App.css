@@ -18,14 +18,18 @@
   
 }
 
+.Input-todo{
+  font-family: cursive;
+  font-size: calc(100px + 2vmin);
 
+}
 
 .Input-box {
   color: #000;
-  font-size: 5c;
+  font-size: 250c;
   background-color: aqua;
   padding: 10mm;
-
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .Send-Button {
@@ -37,13 +41,10 @@
 
 }
 .Save-Button {
-
   color:blue;
   
-
 }
 
 .Item {
-
   padding: 10;
 }
