@@ -44,13 +44,21 @@ function App() {
     );
   },[])
   
+  const deleteColletion =()=> {
+    firebase
+    .database()
+    .ref('user0001').remove()
+    
+  }
+  
   const tabla = JSON.stringify(reservas)
   
   const mytabla =  tabla.split (',').map ((item, i) => <div>
   <p key={i}>{item
     .replace(RegExp(/([.*+?^=!$(){}|[\]\/\\""])/g)," ")
     .replace("userInfo","").replace(":","->").replace(":"," ")
-  }</p><item> {item}</item>
+  }</p><item> {item.replace(RegExp(/([.*+?^=!$(){}|[\]\/\\""])/g)," ")
+  .replace("userInfo","").replace(":","->").replace(":"," ")}</item>
   
   
   <button onClick={()=>writeAdminData(item)}> Confirmar </button></div>);
@@ -67,9 +75,7 @@ function App() {
     
     
     <div style={myStyle}>
-    <h1 style={myStyle}>Introduzca la reserva a confirmar:</h1>
-    
-    <h1> Confirmar manualmente </h1>
+    <h1>Click a la reserva a confirmar o confirmar manualmente </h1>
     
     <input 
     value={input}
@@ -93,7 +99,9 @@ function App() {
     }
     
     </ul>  
-    
+    <button
+    onClick={()=>deleteColletion()}
+    > Limpiar la lista  </button>
     
     </div>
     )
@@ -104,6 +112,9 @@ function App() {
     flex:1,textAlign:'center', alignContent:'center',alignItems:'center'
     
   }
+  
+  
+  
   
   export default App;
   
