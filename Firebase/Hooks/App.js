@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react';
 import firebase from 'firebase';
-import './App.css'
 
 import './App.css';
 
@@ -47,11 +46,14 @@ function App() {
   
   const tabla = JSON.stringify(reservas)
   
-  const mytabla =  tabla.split (',').map ((item, i) => 
+  const mytabla =  tabla.split (',').map ((item, i) => <div>
   <p key={i}>{item
     .replace(RegExp(/([.*+?^=!$(){}|[\]\/\\""])/g)," ")
     .replace("userInfo","").replace(":","->").replace(":"," ")
-  }</p>);
+  }</p><item> {item}</item>
+  
+  
+  <button onClick={()=>writeAdminData(item)}> Confirmar </button></div>);
   
   const writeAdminData =(userInfo)=> {
     firebase.database().ref('user0001').push({
@@ -64,23 +66,27 @@ function App() {
   return (
     
     
-    <div>      
+    <div style={myStyle}>
+    <h1 style={myStyle}>Introduzca la reserva a confirmar:</h1>
+    
+    <h1> Confirmar manualmente </h1>
+    
     <input 
     value={input}
     onChange={e=>handleInput(e.target.value)}
-    > 
+    >
     
     
     </input>
     
-    <button
-    onClick={()=>writeAdminData(input)}
-    >
-    Enviar
+    <button onClick={()=>writeAdminData(input)}> Confirmar </button>
     
-    </button>
+    <br></br>
+    <br></br>
     
-    <ul className='myList'> { 
+    
+    
+    <ul className='myList' > { 
       
       mytabla.reverse()
       
@@ -89,9 +95,14 @@ function App() {
     </ul>  
     
     
-    
     </div>
     )
+  }
+  
+  const myStyle = {
+    
+    flex:1,textAlign:'center', alignContent:'center',alignItems:'center'
+    
   }
   
   export default App;
