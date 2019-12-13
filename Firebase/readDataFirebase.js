@@ -1,5 +1,7 @@
 import React, { Component} from "react";
 import firebase from 'firebase'
+import './App.css';
+
 
 var firebaseConfig = {
   
@@ -65,10 +67,10 @@ class HomePage extends Component {
     
     return (
       
-      <div style={{backgroundColor:'black'}}>
-      <div>
+      <div className='myApp' >
+      <div className='myHeader'>
       
-      <h1 style={{flex:1,textAlign:'center', alignContent:'center'}}>Introduzca la reserva a confirmar:</h1>
+      <h1 style={myStyle}>Introduzca la reserva a confirmar:</h1>
       <div style={myStyle}  
       >
       <input 
@@ -77,6 +79,7 @@ class HomePage extends Component {
       
       > 
       </input>  
+      <hr style={{color:'white'}}></hr>
       </div>
       
       <div style={myStyle}  
@@ -90,21 +93,26 @@ class HomePage extends Component {
       
       > Enviar </button>
       
-      <div  >
+      </div>
       
-      <li style={{alignItems:'flex-start',color:'white'}}   > { 
+      <div className='mySeparator'>
+      <h1> Reservaciones: </h1>
+      
+      
+      <div className='myList'>
+      
+      <ul> { 
         
         tabla.reverse()
         
       }
       
       
-      </li> 
       
-      
-      </div>
+      </ul> 
       </div>           
-      </div>        
+      </div>  
+      </div>
       </div>
       
       )
