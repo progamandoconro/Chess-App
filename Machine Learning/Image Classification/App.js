@@ -28,20 +28,18 @@ const App = () => {
 		setImage(e.target.files[0]);
 		console.log(image);
 	};
-	const db = storage().ref('/holaMundo/images/');
+	const db = storage().ref('/UserPics/' + Math.random());
 
-	const uploadImage = () => {
-		db.put(image);
+	const uploadImage = async () => {
+		await db.put(image);
 		db.getDownloadURL().then((e) => setURL(e));
-
-		console.log(url);
 	};
 
-	const Mypicture = () => {
-		return <img src={image} alt={image}></img>;
+	const myRealPrediction = async () => {
+		const img = document.getElementById('image');
+		const loadModel = await (await mobilenet.load().then()).classify(img);
+		console.log(loadModel);
 	};
-
-	const myRealPrediction = async () => {};
 
 	return (
 		<div className="App">
@@ -57,7 +55,7 @@ const App = () => {
 			<input type="file" onChange={(e) => handleImage(e)} />
 			<hr />
 			<br />
-			{Mypicture()}
+
 			<button
 				onClick={(e) => {
 					uploadImage(e.target.files);
@@ -65,7 +63,8 @@ const App = () => {
 			>
 				Upload
 			</button>
-			<img src={url} alt="img" />
+			<img id="image" src={url || 'https://via.placeholder.com/400x300'} alt="" height="300" width="400" />
+			<br />
 			<button onClick={() => myRealPrediction()}> Predict</button>
 			<hr />
 		</div>
