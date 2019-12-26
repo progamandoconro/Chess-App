@@ -11,6 +11,7 @@ const App = () => {
 	const [res, handleRes] = useState([]);
 	const [image, setImage] = useState([]);
 	const [url, setURL] = useState('');
+	const [predictions, handlePredictions] = useState([]);
 
 	const myPhoto = () => {
 		return <img style={{ padding: '10px' }} id="img" src={photo} alt="foto "></img>;
@@ -36,9 +37,15 @@ const App = () => {
 	};
 
 	const myRealPrediction = async () => {
+		const loadModel = await mobilenet.load();
 		const img = document.getElementById('image');
-		const loadModel = await (await mobilenet.load().then()).classify(img);
-		console.log(loadModel);
+		img.setAttribute('crossOrigin', '');
+		console.log(img);
+		await loadModel.classify(img).then(function(p) {
+			// Classify the image
+			console.log('Predictions: ', p);
+			handlePredictions(p);
+		});
 	};
 
 	return (
@@ -63,10 +70,22 @@ const App = () => {
 			>
 				Upload
 			</button>
-			<img id="image" src={url || 'https://via.placeholder.com/400x300'} alt="" height="300" width="400" />
+			<img
+				id="image"
+				src={url || 'https://via.placeholder.com/400x300'}
+				alt=""
+				height="300"
+				width="400"
+				crossOrigin="anonymous"
+			/>
 			<br />
 			<button onClick={() => myRealPrediction()}> Predict</button>
 			<hr />
+			{predictions.map((e, k) => (
+				<li key={k}>
+					<h1>{e.className + ': ' + Math.round(e.probability * 100) + '%'}</h1>
+				</li>
+			))}
 		</div>
 	);
 };
