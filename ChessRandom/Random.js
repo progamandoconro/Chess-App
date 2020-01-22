@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Chess from 'react-chess'
 import myRandomPositions from './RandomPositions'
 
-const Board = () => {
+const Random = () => {
 
     const [position, handlePosition] = useState(myRandomPositions());
 
@@ -14,17 +14,22 @@ const Board = () => {
 
     return (
         <div >
+
+            <br />
             <button onClick={() => makeRandomPosition()} >
                 Random
             </button>
             <hr />
 
+
             <Chess
                 pieces={position}
 
                 allowMoves={false} />
+
+
         </div>
     )
 }
 
-export default Board;
+export default Random;
