@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
-import Chess from 'react-chess'
+import React, { useState } from 'react';
+import Chess from 'react-chess';
 
 const Pawn = () => {
+    const [letter] = useState(['e']);
+    const [number, setNumber] = useState([2]);
+    const [piece, setPiece] = useState(['P@']);
+    const [position, handlePosition] = useState([piece + letter + number]);
 
-    const [letter, setLetter] = useState(['e']);
-    const [number, setNumber] = useState([2])
-    const [piece, setPiece] = useState(['P@'])
-
-    const [position, handlePosition] = useState([]);
-
-    const makeRandomMove = (e) => {
-
+    const makePawnMove = (e) => {
         if (Number(number) === 2) {
             setNumber(Number(number) + 2);
         }
@@ -22,22 +19,19 @@ const Pawn = () => {
 
             if (Number(number) >= 8) {
                 setPiece('P@');
-                setNumber(2)
+                setNumber(2);
             }
-
         }
-
-        handlePosition([piece + letter + number])
-
+        handlePosition([piece + letter + number]);
     }
 
     return (
         <div >
-            <button onClick={(e) => makeRandomMove(e.target.value)} > Move </button>
+            <button onClick={(e) => makePawnMove(e.target.value)} > Move Up </button>
             <Chess pieces={position} allowMoves={false} />
 
         </div>
-    )
+    );
 }
 
 export default Pawn;
