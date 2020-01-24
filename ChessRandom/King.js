@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import Chess from 'react-chess';
 
 const King = () => {
-
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     const [letter, setLetter] = useState(['b']);
     const [number, setNumber] = useState(Number(1));
     const [piece] = useState(['K@']);
-    const [index, setIndex] = useState(Number(1))
+    const [index, setIndex] = useState(Number(1));
     const [position, handlePosition] = useState(['K@a1']);
 
-    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const makeKingMove = () => {
 
-    const makeKingMove = (e) => {
         const randomMove = () => {
-
             if (Number(Math.random()) > 0.49) {
                 setNumber(Number(number) + 1)
             }
@@ -39,11 +37,13 @@ const King = () => {
                 setIndex(Number(index) + 1)
             }
 
+            setLetter(letters[Number(index)])
+            handlePosition([piece + letter + number]);
+            console.log(position);
+
         }
-        setLetter(letters[Number(index)])
         randomMove();
-        handlePosition([piece + letter + number]);
-        console.log(position);
+
     }
 
     return (
