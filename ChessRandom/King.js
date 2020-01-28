@@ -49,6 +49,7 @@ const King = () => {
     return (
         <div >
             <button onClick={(e) => makeKingMove(e.target.value)} > Move </button>
+            <hr />
             <Chess pieces={position} allowMoves={false} />
 
         </div>

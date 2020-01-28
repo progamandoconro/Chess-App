@@ -10,7 +10,6 @@ const Rook = () => {
     const [position, handlePosition] = useState(['R@a1']);
 
     const makeRookMove = () => {
-
         const randomMove = () => {
             const n = Math.floor(Math.random() * numbers.length);
 
@@ -30,6 +29,7 @@ const Rook = () => {
     return (
         <div >
             <button onClick={(e) => makeRookMove(e.target.value)} > Move </button>
+            <hr />
             <Chess pieces={position} allowMoves={false} />
 
         </div>

@@ -5,6 +5,7 @@ import Random from './Random';
 import Pawn from './Pawn';
 import King from './King';
 import Rook from './Rook';
+import Knight from './Knight';
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
 
       <h1>Rook moves</h1>
       <Rook />
+      <br />
+
+      <h1>Knight moves</h1>
+      <Knight />
       <br />
 
       <h1>Pawn promotion</h1>

@@ -28,6 +28,7 @@ const Pawn = () => {
     return (
         <div >
             <button onClick={(e) => makePawnMove(e.target.value)} > Move Up </button>
+            <hr />
             <Chess pieces={position} allowMoves={false} />
 
         </div>
