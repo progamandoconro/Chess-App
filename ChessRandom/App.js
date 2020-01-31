@@ -6,6 +6,9 @@ import Pawn from './Pawn';
 import King from './King';
 import Rook from './Rook';
 import Knight from './Knight';
+import BishopDS from './BishopDS';
+import BishopLS from './BishopLS';
+import Queen from './Queen';
 
 function App() {
 
@@ -13,23 +16,37 @@ function App() {
 
     <div className='ChessBoard'>
 
-      <h1>King moves</h1>
+      <h1> Chess Random Moves Generator, by Ro </h1>
+
+      <h2>King moves</h2>
       <King />
       <br />
 
-      <h1>Rook moves</h1>
+      <h2>Rook moves</h2>
       <Rook />
       <br />
 
-      <h1>Knight moves</h1>
+      <h2>Bishop moves in Dark Squares</h2>
+      <BishopDS />
+      <br />
+
+      <h2>Bishop moves in Light Squares</h2>
+      <BishopLS />
+      <br />
+
+      <h2>Knight moves</h2>
       <Knight />
       <br />
 
-      <h1>Pawn promotion</h1>
+      <h2>Pawn promotion</h2>
       <Pawn />
       <br />
 
-      <h1>Random Positions</h1>
+      <h2>Queen Moves</h2>
+      <Queen />
+      <br />
+
+      <h2>Random Positions</h2>
       <Random />
 
     </div>
