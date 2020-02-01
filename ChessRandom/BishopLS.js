@@ -6,29 +6,29 @@ const BishopLightSquares = () => {
     const [position, handlePosition] = useState(['B@e4']);
     const [diagonal, setDiagonal] = useState(['e4']);
 
-    //black squares
+    //light squares
 
     //short diagonals
-    const mov1BB = ['a8'];
-    const mov2BB = ['a6', 'b7', 'c8'];
-    const mov3BB = ['a4', 'b5', 'c6', 'd7', 'e8'];
-    const mov4BB = ['a2', 'b3', 'c4', 'd4', 'e6', 'f7', 'g8'];
-    const mov5BB = ['b1', 'c2', 'd3', 'e4', 'f5', 'g6', 'h7'];
-    const mov6BB = ['d1', 'e2', 'f3', 'g4', 'h5'];
-    const mov7BB = ['f1', 'g2', 'h3'];
-    const mov8BB = ['h1'];
+    const mov1LB = ['a8'];
+    const mov2LB = ['a6', 'b7', 'c8'];
+    const mov3LB = ['a4', 'b5', 'c6', 'd7', 'e8'];
+    const mov4LB = ['a2', 'b3', 'c4', 'd4', 'e6', 'f7', 'g8'];
+    const mov5LB = ['b1', 'c2', 'd3', 'e4', 'f5', 'g6', 'h7'];
+    const mov6LB = ['d1', 'e2', 'f3', 'g4', 'h5'];
+    const mov7LB = ['f1', 'g2', 'h3'];
+    const mov8LB = ['h1'];
 
     //long diagonals 
-    const mov1GDBB = ['g8', 'h7'];
-    const mov2GDBB = ['e8', 'f7', 'g6', 'h5'];
-    const mov3GDBB = ['c8', 'd7', 'e6', 'f5', 'g4', 'h3'];
-    const mov4GDBB = ['a8', 'b7', 'c6', 'd5', 'e4', 'f3', 'g2', 'h1'];
-    const mov5GDBB = ['a6', 'b5', 'c4', 'd3', 'e2', 'f1'];
-    const mov6GDBB = ['a4', 'b3', 'c2', 'd1'];
-    const mov7GDBB = ['a2', 'b1'];
+    const mov1GDLB = ['g8', 'h7'];
+    const mov2GDLB = ['e8', 'f7', 'g6', 'h5'];
+    const mov3GDLB = ['c8', 'd7', 'e6', 'f5', 'g4', 'h3'];
+    const mov4GDLB = ['a8', 'b7', 'c6', 'd5', 'e4', 'f3', 'g2', 'h1'];
+    const mov5GDLB = ['a6', 'b5', 'c4', 'd3', 'e2', 'f1'];
+    const mov6GDLB = ['a4', 'b3', 'c2', 'd1'];
+    const mov7GDLB = ['a2', 'b1'];
 
-    const allMoves = [mov1BB, mov2BB, mov3BB, mov4BB, mov5BB, mov6BB, mov7BB, mov8BB];
-    const allMoves2 = [mov1GDBB, mov2GDBB, mov3GDBB, mov4GDBB, mov5GDBB, mov6GDBB, mov7GDBB];
+    const allMoves = [mov1LB, mov2LB, mov3LB, mov4LB, mov5LB, mov6LB, mov7LB, mov8LB];
+    const allMoves2 = [mov1GDLB, mov2GDLB, mov3GDLB, mov4GDLB, mov5GDLB, mov6GDLB, mov7GDLB];
 
     const randomMoveBishopLightSquares = (array) => {
 
