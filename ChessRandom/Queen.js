@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chess from 'react-chess';
-import Diagonals from './const/Diagonals'
+import Diagonals from '../const/Diagonals'
 
 const Queen = () => {
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];

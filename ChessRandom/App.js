@@ -1,57 +1,48 @@
-import React from 'react';
-import './App.css';
-//import ReadPGN from './ReadPGN';
-import Random from './Random';
-import Pawn from './Pawn';
-import King from './King';
-import Rook from './Rook';
-import Knight from './Knight';
-import BishopDS from './BishopDS';
-import BishopLS from './BishopLS';
-import Queen from './Queen';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import BasicMoves from './BasicMoves';
+import Captures from './Captures'
 
-function App() {
+export default function App() {
+    return (
+        <Router>
+            <div>
+                <Link to="/"> Home   </Link>
+                <br />
 
-  return (
+                <Link to="/captures">   Captures </Link>
+                <br />
 
-    <div className='ChessBoard'>
+                <Link to="/random">   Moves </Link>
 
-      <h1> Chess Random Moves Generator, by Ro </h1>
+                <br />
 
-      <h2>King moves</h2>
-      <King />
-      <br />
 
-      <h2>Rook moves</h2>
-      <Rook />
-      <br />
-
-      <h2>Bishop moves in Dark Squares</h2>
-      <BishopDS />
-      <br />
-
-      <h2>Bishop moves in Light Squares</h2>
-      <BishopLS />
-      <br />
-
-      <h2>Knight moves</h2>
-      <Knight />
-      <br />
-
-      <h2>Pawn promotion</h2>
-      <Pawn />
-      <br />
-
-      <h2>Queen Moves</h2>
-      <Queen />
-      <br />
-
-      <h2>Random Positions</h2>
-      <Random />
-
-    </div>
-
-  );
+                {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                <Switch>
+                    <Route path="/captures">
+                        <Captures />
+                    </Route>
+                    <Route path="/random">
+                        <BasicMoves />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
-export default App;
+function Home() {
+    return <h2>Home</h2>;
+}
+
+
