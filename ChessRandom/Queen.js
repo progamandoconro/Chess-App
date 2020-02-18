@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chess from 'react-chess';
-import Diagonals from '../const/Diagonals'
+import Diagonals from './const/Diagonals'
 
 const Queen = () => {
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -23,7 +23,6 @@ const Queen = () => {
                 setLetter(letters[randomNumber(letters)]);
 
             }
-            console.log(position, letter, number, 'caso 1');
 
         } else {
             for (let index = 0; index < Diagonals.length; index++) {
