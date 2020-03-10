@@ -1,6 +1,4 @@
 import React, { useContext, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import * as tf from "@tensorflow/tfjs";
 
 function App() {
@@ -37,9 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
+      <header className="App-header" />
         <input value={myState} onChange={e => setMyState(e.target.value)} />
         <h1>{value}</h1>
 
