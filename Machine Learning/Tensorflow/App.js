@@ -4,9 +4,6 @@ import "./App.css";
 import * as tf from "@tensorflow/tfjs";
 
 function App() {
-  const [myState, setMyState] = useState("");
-  const myContext = React.createContext(myState);
-  const value = useContext(myContext);
   const [result, fixResult] = useState([0]);
 
   const myFirstNet = async () => {
@@ -24,7 +21,6 @@ function App() {
     };
 
     await r();
-    console.log(result);
   };
 
   const handleResult = async () => {
@@ -46,17 +42,13 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <input value={myState} onChange={e => setMyState(e.target.value)} />
-        <h1>{value}</h1>
-
         <button
           onClick={() => {
             handleResult();
             showResult();
           }}
         >
-          {" "}
-          Net Calculate{" "}
+          Net Calculate
         </button>
         {result}
       </header>
