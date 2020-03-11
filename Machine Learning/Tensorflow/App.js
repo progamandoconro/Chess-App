@@ -7,13 +7,19 @@ function App() {
   const [result, fixResult] = useState([0]);
 
   const [fiboNth, setFiboNth] = useState(Number(1));
+  const [hidden, setHidden] = useState(Number(1));
+
   const dataX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const dataY = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+  const dataY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const myFirstNet = async () => {
     const model = tf.sequential();
 
     model.add(
-      tf.layers.dense({ units: 20, inputShape: [1], activation: "selu" })
+      tf.layers.dense({
+        units: Number(hidden),
+        inputShape: [1],
+        activation: "linear"
+      })
     );
 
     model.add(tf.layers.dense({ units: 1, activation: "linear" }));
@@ -51,11 +57,21 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h5>Number to predict</h5>
         <input
           type="number"
           value={fiboNth}
           onChange={e => setFiboNth(e.target.value)}
         />
+
+        <h5>Hidden layer</h5>
+        <input
+          type="number"
+          value={hidden}
+          onChange={e => setHidden(e.target.value)}
+        />
+
+        <br />
 
         <button
           onClick={() => {
