@@ -25,7 +25,17 @@ function App() {
   };
 
   const showList = () => {
-    return <li> Nombre: {data[index]}</li>;
+    const l = [];
+    for (let i = 0; i < index; i++) {
+      l.push(data[i]);
+    }
+    return (
+      <div>
+        {l.map((v, k) => {
+          return <li key={k}> {v}</li>;
+        })}
+      </div>
+    );
   };
 
   return (
