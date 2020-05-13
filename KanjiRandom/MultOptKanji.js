@@ -25,11 +25,10 @@ export default function TestingScreen() {
 
   const question = [KanjiNt.kanji];
 
-  const ans = [
+  const answer = [
     KanjiNt.kunyomi + " / " + KanjiNt.onyomi + " / " + KanjiNt.meaning,
   ];
 
-  const [answer, setAnswer] = useState(ans);
   const [color, setColor] = useState(randomColor());
   const [index, setIndex] = useState([0, 1, 2, 3, 4]);
   const [check, setCheck] = useState(false);
@@ -57,14 +56,9 @@ export default function TestingScreen() {
 
   const handleNext = () => {
     setRandomNum(randomNumberGenerator());
-
-    setAnswer(ans);
     setColor(randomColor());
-
     shuffle(index);
-
     setIndex(index);
-    console.log(ans);
     setCheck(false);
   };
 
