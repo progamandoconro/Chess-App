@@ -16,14 +16,14 @@ const randomNumberGenerator = (n = 850) => {
 };
 
 export default function TestingScreen() {
-  const [randomNum, setRandomNum] = useState(randomNumberGenerator(850));
+  const [randomNum, setRandomNum] = useState(randomNumberGenerator());
 
   const KanjiNt = data[0].Kanji.DATA[randomNum];
   const wrongData1 = data[0].Kanji.DATA[randomNumberGenerator()];
   const wrongData2 = data[0].Kanji.DATA[randomNumberGenerator()];
   const wrongData3 = data[0].Kanji.DATA[randomNumberGenerator()];
 
-  const [question, setQuestion] = useState(KanjiNt.kanji);
+  const question = [KanjiNt.kanji];
 
   const ans = [
     KanjiNt.kunyomi + " / " + KanjiNt.onyomi + " / " + KanjiNt.meaning,
@@ -32,6 +32,7 @@ export default function TestingScreen() {
   const [answer, setAnswer] = useState(ans);
   const [color, setColor] = useState(randomColor());
   const [index, setIndex] = useState([0, 1, 2, 3, 4]);
+  const [check, setCheck] = useState(false);
   const allAnswers = [
     answer,
     wrongData1.kunyomi + " / " + wrongData1.onyomi + " / " + wrongData1.meaning,
@@ -46,22 +47,17 @@ export default function TestingScreen() {
       const randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
 
-      const temporaryValue = array[currentIndex];
+      const temporarychecked = array[currentIndex];
       array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+      array[randomIndex] = temporarychecked;
     }
 
     return array;
   };
 
   const handleNext = () => {
-    setRandomNum(randomNumberGenerator(850));
-    const KanjiNt = data[0].Kanji.DATA[randomNum];
+    setRandomNum(randomNumberGenerator());
 
-    const ans = [
-      KanjiNt.kunyomi + " / " + KanjiNt.onyomi + " / " + KanjiNt.meaning,
-    ];
-    setQuestion(KanjiNt.kanji);
     setAnswer(ans);
     setColor(randomColor());
 
@@ -69,6 +65,15 @@ export default function TestingScreen() {
 
     setIndex(index);
     console.log(ans);
+    setCheck(false);
+  };
+
+  const handleCheck = (obs, real) => {
+    if (obs !== real) {
+      alert(real);
+    } else {
+      handleNext();
+    }
   };
 
   const showKanji = () => {
@@ -111,22 +116,44 @@ export default function TestingScreen() {
       <Container>
         <Paper>
           <Card>
-            <CardContent style={{ backgroundColor: color }}>
+            <CardContent
+              style={{ backgroundColor: "grey", textAlign: "initial" }}
+            >
               <Typography>
                 {" "}
-                <input type="checkbox" id="checkbox1" value="false" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  checked={check}
+                  onChange={() => handleCheck(allAnswers[index[0]], answer)}
+                />
                 {allAnswers[index[0]]}
               </Typography>
               <Typography>
-                <input type="checkbox" id="checkbox1" value="false" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  checked={check}
+                  onChange={() => handleCheck(allAnswers[index[1]], answer)}
+                />
                 {allAnswers[index[1]]}
               </Typography>
               <Typography>
-                <input type="checkbox" id="checkbox1" value="false" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  checked={check}
+                  onChange={() => handleCheck(allAnswers[index[2]], answer)}
+                />
                 {allAnswers[index[2]]}
               </Typography>
               <Typography>
-                <input type="checkbox" id="checkbox1" value="false" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  checked={check}
+                  onChange={() => handleCheck(allAnswers[index[3]], answer)}
+                />
                 {allAnswers[index[3]]}
               </Typography>
             </CardContent>
