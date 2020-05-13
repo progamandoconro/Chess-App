@@ -70,6 +70,21 @@ export default function TestingScreen() {
     }
   };
 
+  const showMultipleOptions = (val) => {
+    return (
+      <Typography>
+        {" "}
+        <input
+          type="checkbox"
+          id="checkbox1"
+          checked={check}
+          onChange={() => handleCheck(allAnswers[index[val]], answer)}
+        />
+        {allAnswers[index[val]]}
+      </Typography>
+    );
+  };
+
   const showKanji = () => {
     return (
       <Container className="Container">
@@ -113,43 +128,10 @@ export default function TestingScreen() {
             <CardContent
               style={{ backgroundColor: "grey", textAlign: "initial" }}
             >
-              <Typography>
-                {" "}
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  checked={check}
-                  onChange={() => handleCheck(allAnswers[index[0]], answer)}
-                />
-                {allAnswers[index[0]]}
-              </Typography>
-              <Typography>
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  checked={check}
-                  onChange={() => handleCheck(allAnswers[index[1]], answer)}
-                />
-                {allAnswers[index[1]]}
-              </Typography>
-              <Typography>
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  checked={check}
-                  onChange={() => handleCheck(allAnswers[index[2]], answer)}
-                />
-                {allAnswers[index[2]]}
-              </Typography>
-              <Typography>
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  checked={check}
-                  onChange={() => handleCheck(allAnswers[index[3]], answer)}
-                />
-                {allAnswers[index[3]]}
-              </Typography>
+              {showMultipleOptions(0)}
+              {showMultipleOptions(1)}
+              {showMultipleOptions(2)}
+              {showMultipleOptions(3)}
             </CardContent>
           </Card>
         </Paper>
