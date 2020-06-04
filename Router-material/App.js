@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Card, Container, Typography, Tab, Tabs } from "@material-ui/core/";
 import "./App.css";
@@ -6,7 +6,7 @@ import "./App.css";
 export default function App() {
   return (
     <Router>
-      <Container>
+      <Container className="App">
         <br />
         <hr />
         <Card>
@@ -59,7 +59,9 @@ function Home() {
   return (
     <Container>
       <br />
-      <Typography>Home</Typography>
+      <Card>
+        <Typography>Home</Typography>
+      </Card>
     </Container>
   );
 }
@@ -68,7 +70,9 @@ function About() {
   return (
     <Container>
       <br />
-      <Typography>About</Typography>
+      <Card>
+        <Typography>About</Typography>
+      </Card>
     </Container>
   );
 }
@@ -77,7 +81,9 @@ function Topics() {
   return (
     <Container>
       <br />
-      <Typography>Topics</Typography>
+      <Card>
+        <Typography>Topics</Typography>
+      </Card>
     </Container>
   );
 }
@@ -86,7 +92,9 @@ function Charts() {
   return (
     <Container>
       <br />
-      <Typography>Charts</Typography>
+      <Card>
+        <Typography>Charts</Typography>
+      </Card>
     </Container>
   );
 }
@@ -95,7 +103,9 @@ function Tables() {
   return (
     <Container>
       <br />
-      <Typography>Tables</Typography>
+      <Card>
+        <Typography>Tables</Typography>
+      </Card>
     </Container>
   );
 }
