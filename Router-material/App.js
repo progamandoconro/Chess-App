@@ -1,9 +1,90 @@
- import React from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Card, Container, Typography, Tab, Tabs } from "@material-ui/core/";
+import {
+  Table,
+  Card,
+  Container,
+  Typography,
+  Tab,
+  Tabs,
+  TableCell,
+} from "@material-ui/core/";
 import "./App.css";
 
+function Home() {
+  return (
+    <Container>
+      <br />
+      <Card>
+        <Typography>Home</Typography>
+      </Card>
+    </Container>
+  );
+}
+
+function About() {
+  return (
+    <Container>
+      <br />
+      <Card>
+        <Typography>About</Typography>
+        {data}
+      </Card>
+    </Container>
+  );
+}
+
+function Topics() {
+  return (
+    <Container>
+      <br />
+      <Card>
+        <Typography>Topics</Typography>
+      </Card>
+    </Container>
+  );
+}
+
+function Charts() {
+  return (
+    <Container>
+      <br />
+      <Card>
+        <Typography>Charts</Typography>
+      </Card>
+    </Container>
+  );
+}
+
+function Tables() {
+  return (
+    <Container>
+      <br />
+      <Card>
+        <Typography>Tables</Typography>
+        <Table>
+          My Tables
+          <TableCell>2</TableCell>
+          <TableCell>2</TableCell>
+          <TableCell>2</TableCell>
+          <TableCell>2</TableCell>
+        </Table>
+      </Card>
+    </Container>
+  );
+}
+
+const data = [];
+
+const callAPI = async () => {
+  const res = await fetch(" https://api.github.com/users/programandoconro");
+  const get = await res.json();
+  const json = JSON.stringify(get);
+  data.push(json);
+};
+
 export default function App() {
+  callAPI();
   return (
     <Router>
       <Container className="App">
@@ -52,60 +133,5 @@ export default function App() {
         </Switch>
       </Container>
     </Router>
-  );
-}
-
-function Home() {
-  return (
-    <Container>
-      <br />
-      <Card>
-        <Typography>Home</Typography>
-      </Card>
-    </Container>
-  );
-}
-
-function About() {
-  return (
-    <Container>
-      <br />
-      <Card>
-        <Typography>About</Typography>
-      </Card>
-    </Container>
-  );
-}
-
-function Topics() {
-  return (
-    <Container>
-      <br />
-      <Card>
-        <Typography>Topics</Typography>
-      </Card>
-    </Container>
-  );
-}
-
-function Charts() {
-  return (
-    <Container>
-      <br />
-      <Card>
-        <Typography>Charts</Typography>
-      </Card>
-    </Container>
-  );
-}
-
-function Tables() {
-  return (
-    <Container>
-      <br />
-      <Card>
-        <Typography>Tables</Typography>
-      </Card>
-    </Container>
   );
 }
