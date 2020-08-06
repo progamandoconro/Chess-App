@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+function Clock() {
   const initialTime = new Date();
   const s_ini = initialTime.getUTCSeconds();
   const m_ini = initialTime.getUTCMinutes();
@@ -28,11 +28,18 @@ function App() {
     updateSeconds();
   });
 
+  const addZeros = (unit) => {
+    let zeroVal = '0';
+    if (unit < 10) {
+      return zeroVal.concat(String(unit));
+    }
+    return unit;
+  };
+
   const timeTenerife = () => {
     let tenerifeHours = h_ini + 1;
     h_ini === 23 && (tenerifeHours = 0);
-
-    return tenerifeHours;
+    return addZeros(tenerifeHours);
   };
 
   const timeJapan = () => {
@@ -42,24 +49,24 @@ function App() {
       h_ini > 14 + i && (japanHours = i);
     }
 
-    return japanHours;
+    return addZeros(japanHours);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>
-          UTC {hours}:{minutes}:{seconds}
+          UTC {addZeros(hours)}:{addZeros(minutes)}:{addZeros(seconds)}
         </h1>
         <h1>
-          Tenerife {timeTenerife()}: {minutes}
+          Tenerife {timeTenerife()}: {addZeros(minutes)}
         </h1>
         <h1>
-          Fukuoka {timeJapan()}: {minutes}
+          Fukuoka {timeJapan()}: {addZeros(minutes)}
         </h1>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Clock;
