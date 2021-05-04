@@ -46,14 +46,20 @@ const Anki = () => {
     const AnswerSection = () => {
       if (showAnswer === true) {
         return (
-          <View style={styles.buttonSection}>
-            <Text>{kanjiList[randomNum].kun_readings}</Text>
-            <Text>{kanjiList[randomNum].meanings}</Text>
-            <Button title="GOOD" onPress={randomGen} />
-            <Text> </Text>
-            <Button title="HARD" />
-            <Text> </Text>
-            <Button title="AGAIN" />
+          <View>
+            <View style={styles.answerSection}>
+              <Text style={styles.answer}>
+                {kanjiList[randomNum].kun_readings}
+              </Text>
+              <Text style={styles.answer}>{kanjiList[randomNum].meanings}</Text>
+            </View>
+            <View style={styles.buttonSection}>
+              <Button title="GOOD" onPress={randomGen} />
+              <Text> </Text>
+              <Button title="HARD" />
+              <Text> </Text>
+              <Button title="AGAIN" />
+            </View>
           </View>
         );
       } else {
@@ -66,7 +72,7 @@ const Anki = () => {
     };
     return (
       <View style={styles.ankiSection}>
-        <Text style={{fontSize: 100}}>{kanjiList[randomNum].kanjis}</Text>
+        <Text style={styles.kanjiSection}>{kanjiList[randomNum].kanjis}</Text>
         <AnswerSection />
       </View>
     );
@@ -83,6 +89,13 @@ const styles = StyleSheet.create({
   app: {
     minHeight: '100%',
   },
+  answerSection: {
+    alignItems: 'center',
+  },
+
+  answer: {
+    fontSize: 50,
+  },
 
   ankiSection: {
     flexDirection: 'column',
@@ -97,6 +110,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 0,
+  },
+  kanjiSection: {
+    fontSize: 200,
   },
 });
 
