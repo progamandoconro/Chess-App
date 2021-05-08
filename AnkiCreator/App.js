@@ -1,6 +1,6 @@
 /**
-React Native App to study Kanji. Uses Anki method and Kanjis can be added by the user. 
-TODO: Anki Logic and save object into memory.
+ React Native App to study Kanji. Uses Anki method and Kanjis can be added by the user. 
+ TODO: Anki Logic and save object into memory.
  */
 
 import React, {useEffect, useState} from 'react';
@@ -10,7 +10,6 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   Button,
   TouchableOpacity,
@@ -52,13 +51,19 @@ const App: () => Node = () => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View>
-          <Text>Kanji</Text>
-          <TextInput />
-          <Text>Hiragana</Text>
-          <TextInput />
-          <Text>Meaning</Text>
-          <Text></Text>
+        <View style={styles.input}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Kanji 漢字</Text>
+            <TextInput style={styles.inputInput} />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>平仮名 Hiragana</Text>
+            <TextInput style={styles.inputInput} />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>意味 Meaning</Text>
+            <TextInput style={styles.inputInput} />
+          </View>
         </View>
         <View style={styles.buttons}>
           <TextInput />
@@ -189,7 +194,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 75,
     height: 75,
-    backgroundColor: '#fff',
     borderRadius: 50,
     backgroundColor: 'blue',
   },
@@ -215,6 +219,29 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 30,
   },
+  input: {
+    paddingVertical: 10,
+    flex: 4,
+    justifyContent: 'center',
+  },
+  inputTitle: {
+    fontSize: 30,
+    height: 40,
+  },
+  inputContainer: {
+    height: '25%',
+    paddingVertical: 40,
+    paddingHorizontal: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputInput: {
+    height: 50,
+    width: '75%',
+    margin: 12,
+    borderWidth: 1,
+    backgroundColor: 'grey',
+    fontSize: 20,
+  },
 });
 
-export default App;
