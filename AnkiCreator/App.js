@@ -5,9 +5,6 @@
 
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -16,11 +13,18 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {getAllKeys, saveValue, readValue, removeValue} from './storage';
 
 const App: () => Node = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    saveValue('2', 'testo');
+    getAllKeys();
+    readValue('2');
+    removeValue('1');
+  }, []);
+
   const handleRepeat = () => {
     console.log('Repeat');
   };
@@ -245,3 +249,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default App;
