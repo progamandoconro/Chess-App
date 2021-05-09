@@ -1,6 +1,6 @@
 /**
  React Native App to study Kanji. Uses Anki method and Kanjis can be added by the user. 
- TODO: Anki Logic and save object into memory.
+ TODO: Anki Logic.
  */
 
 import React, {useEffect, useState} from 'react';
@@ -19,34 +19,41 @@ const App: () => Node = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    saveValue('2', 'testo');
     getAllKeys();
-    readValue('2');
-    removeValue('1');
+    const anki = readValue('0');
   }, []);
 
-  const handleRepeat = () => {
+  const handleRepeat = id => {
     console.log('Repeat');
   };
-  const handleGood = () => {
+  const handleGood = id => {
     console.log('Good');
   };
-  const handleHard = () => {
+  const handleHard = id => {
     console.log('Hard');
   };
-  const handleEasy = () => {
+  const handleEasy = id => {
     console.log('Easy');
   };
-  const handleAdd = () => {
+  const handleAddButton = id => {
     console.log('Add');
     setModalVisible(true);
   };
 
-  const handleAddKanji = () => {
-    console.log('Add Kanji');
-  };
-
   const ModalScreen = () => {
+    const [kanji, setKanji] = useState({
+      id: '',
+      kanji: '',
+      reading: '',
+      meaning: '',
+      anki: '',
+    });
+
+    const handleAddKanji = () => {
+      console.log('Add Kanji');
+      saveValue('0', JSON.stringify(kanji));
+    };
+
     return (
       <Modal
         style={styles.modalScreen}
@@ -58,15 +65,36 @@ const App: () => Node = () => {
         <View style={styles.input}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Kanji 漢字</Text>
-            <TextInput style={styles.inputInput} />
+            <TextInput
+              value={kanji.kanji}
+              onChangeText={e => {
+                setKanji({...kanji, kanji: e});
+              }}
+              style={styles.inputInput}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>平仮名 Hiragana</Text>
-            <TextInput style={styles.inputInput} />
+            <TextInput
+              style={styles.inputInput}
+              value={kanji.reading}
+              onChangeText={e => {
+                setKanji({...kanji, reading: e});
+              }}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>意味 Meaning</Text>
-            <TextInput style={styles.inputInput} />
+            <TextInput
+              style={styles.inputInput}
+              value={kanji.meaning}
+              onChangeText={e => {
+                setKanji({
+                  ...kanji,
+                  meaning: e,
+                });
+              }}
+            />
           </View>
         </View>
         <View style={styles.buttons}>
@@ -90,10 +118,11 @@ const App: () => Node = () => {
       </Modal>
     );
   };
+
   return (
     <View style={styles.app}>
       <View style={styles.addContainer}>
-        <TouchableOpacity style={styles.add} onPress={handleAdd}>
+        <TouchableOpacity style={styles.add} onPress={handleAddButton}>
           <Text style={styles.customBtnText}>+</Text>
         </TouchableOpacity>
       </View>

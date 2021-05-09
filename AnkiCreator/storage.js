@@ -1,3 +1,4 @@
+//yarn add @react-native-async-storage/async-storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function getAllKeys() {
