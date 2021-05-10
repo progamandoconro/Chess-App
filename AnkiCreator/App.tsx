@@ -13,14 +13,38 @@ import {
   TextInput,
 } from 'react-native';
 import {getAllKeys, saveValue, readValue} from './storage';
+
+interface Anki {
+  id: string;
+  kanji: string;
+  reading: string;
+  meaning: string;
+  anki: string;
+}
+
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [val, setVal] = useState({});
+  const [chosen, setChosen] = useState({
+    id: '',
+    kanji: '',
+    reading: '',
+    meaning: '',
+  });
+  const updateKanji = (id: string) => {
+    setVal(readValue(id));
+    const ob = Object.values(val)[2];
+
+    if (ob) {
+      const r = JSON.parse(String(ob));
+      return {...r};
+    }
+  };
 
   useEffect(() => {
     getAllKeys();
-    setVal(readValue('0'));
-    console.log(val);
+    setChosen(updateKanji('0'));
+    console.log(chosen);
   }, []);
 
   const handleRepeat = () => {
@@ -125,9 +149,9 @@ const App = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.anki}>
-        <Text style={styles.kanji}>漢字</Text>
-        <Text style={styles.hiragana}>ひらがな</Text>
-        <Text style={styles.meaning}>Meaning</Text>
+        <Text style={styles.kanji}>{chosen && chosen.kanji}</Text>
+        <Text style={styles.hiragana}>{chosen && chosen.reading}</Text>
+        <Text style={styles.meaning}>{chosen && chosen.meaning}</Text>
       </View>
       <ModalScreen />
       <View style={styles.buttons}>
