@@ -8,50 +8,51 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TouchableOpacity,
   Modal,
   TextInput,
 } from 'react-native';
-import {getAllKeys, saveValue, readValue, removeValue} from './storage';
-
-const App: () => Node = () => {
+import {getAllKeys, saveValue, readValue} from './storage';
+const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [val, setVal] = useState({});
 
   useEffect(() => {
     getAllKeys();
-    const anki = readValue('0');
+    setVal(readValue('0'));
+    console.log(val);
   }, []);
 
-  const handleRepeat = id => {
+  const handleRepeat = () => {
     console.log('Repeat');
   };
-  const handleGood = id => {
+  const handleGood = () => {
     console.log('Good');
   };
-  const handleHard = id => {
+  const handleHard = () => {
     console.log('Hard');
   };
-  const handleEasy = id => {
+  const handleEasy = () => {
     console.log('Easy');
   };
-  const handleAddButton = id => {
+  const handleAddButton = () => {
     console.log('Add');
     setModalVisible(true);
   };
 
   const ModalScreen = () => {
-    const [kanji, setKanji] = useState({
-      id: '',
-      kanji: '',
-      reading: '',
-      meaning: '',
-      anki: '',
+    const [kanji, setKanji] = useState<Anki>({
+      id: '0',
+      kanji: '猫',
+      reading: 'ねこ',
+      meaning: 'Gato',
+      anki: '100',
     });
 
     const handleAddKanji = () => {
       console.log('Add Kanji');
       saveValue('0', JSON.stringify(kanji));
+      setModalVisible(false);
     };
 
     return (
@@ -60,7 +61,7 @@ const App: () => Node = () => {
         animationType="slide"
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(false);
         }}>
         <View style={styles.input}>
           <View style={styles.inputContainer}>
@@ -89,10 +90,7 @@ const App: () => Node = () => {
               style={styles.inputInput}
               value={kanji.meaning}
               onChangeText={e => {
-                setKanji({
-                  ...kanji,
-                  meaning: e,
-                });
+                setKanji({...kanji, meaning: e});
               }}
             />
           </View>
