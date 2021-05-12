@@ -12,56 +12,140 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-import {getAllKeys, saveValue, readValue} from './storage';
-
-interface Anki {
-  id: string;
-  kanji: string;
-  reading: string;
-  meaning: string;
-  anki: string;
-}
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
+  interface Anki {
+    id: string;
+    kanji: string;
+    reading: string;
+    meaning: string;
+    anki: string;
+  }
+  interface Random {
+    value: string;
+    lenght: string;
+  }
   const [modalVisible, setModalVisible] = useState(false);
-  const [val, setVal] = useState({});
-  const [chosen, setChosen] = useState({
-    id: '',
-    kanji: '',
-    reading: '',
-    meaning: '',
-  });
-  const updateKanji = (id: string) => {
-    setVal(readValue(id));
-    const ob = Object.values(val)[2];
+  const [kanjiData, setKanjiData] = useState<string | null>('');
+  const [result, setResult] = useState<Anki>();
+  const [random, setRandom] = useState<Random>();
+  const [ankiButtons, setAnkiButtons] = useState(false);
 
-    if (ob) {
-      const r = JSON.parse(String(ob));
-      return {...r};
-    }
+  async function getRandomKey() {
+    const allKeys = await AsyncStorage.getAllKeys();
+    console.log(allKeys);
+    const r = Math.floor(Math.random() * allKeys.length);
+
+    setRandom({value: allKeys[r], lenght: String(allKeys.length)});
+  }
+  async function saveValue(key: string, value: string) {
+    await AsyncStorage.setItem(key, value);
+  }
+  async function readValue(key: string) {
+    //await AsyncStorage.clear()
+    saveValue(
+      '0',
+      JSON.stringify({
+        id: '0',
+        kanji: '猫',
+        reading: 'ねこ',
+        meaning: 'Gato',
+        anki: '0',
+      }),
+    );
+    const value = await AsyncStorage.getItem(key);
+    setKanjiData(value);
+  }
+  const updateKanji = () => {
+    setAnkiButtons(false);
+    getRandomKey();
+    random && readValue(random.value);
   };
 
   useEffect(() => {
-    getAllKeys();
-    setChosen(updateKanji('0'));
-    console.log(chosen);
+    saveValue(
+      '0',
+      JSON.stringify({
+        id: '0',
+        kanji: '猫',
+        reading: '猫',
+        meaning: 'Gato',
+        anki: '0',
+      }),
+    );
+    random && readValue(random.value);
   }, []);
+
+  useEffect(() => {
+    let k: string | null;
+    if (kanjiData) {
+      k = kanjiData;
+      const o = JSON.parse(k);
+      setResult(o);
+    }
+    getRandomKey();
+  }, [kanjiData]);
 
   const handleRepeat = () => {
     console.log('Repeat');
+    updateKanji();
   };
   const handleGood = () => {
     console.log('Good');
+    updateKanji();
   };
   const handleHard = () => {
     console.log('Hard');
+    updateKanji();
   };
   const handleEasy = () => {
     console.log('Easy');
+    updateKanji();
   };
   const handleAddButton = () => {
     console.log('Add');
     setModalVisible(true);
+  };
+  const AnkiButtons = () => {
+    if (!ankiButtons) {
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.hard}
+            onPress={() => {
+              setAnkiButtons(true);
+            }}>
+            <Text> Show Answer </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.repeat} onPress={handleRepeat}>
+              <Text style={styles.customBtnText}>Repeat</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.hard} onPress={handleHard}>
+              <Text style={styles.customBtnText}>Hard</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.good} onPress={handleGood}>
+              <Text style={styles.customBtnText}>Good</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.easy} onPress={handleEasy}>
+              <Text style={styles.customBtnText}>Easy</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      );
+    }
   };
 
   const ModalScreen = () => {
@@ -75,8 +159,11 @@ const App = () => {
 
     const handleAddKanji = () => {
       console.log('Add Kanji');
-      saveValue('0', JSON.stringify(kanji));
+      random &&
+        saveValue(String(Number(random.lenght) + 1), JSON.stringify(kanji));
+
       setModalVisible(false);
+      readValue('0');
     };
 
     return (
@@ -149,32 +236,13 @@ const App = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.anki}>
-        <Text style={styles.kanji}>{chosen && chosen.kanji}</Text>
-        <Text style={styles.hiragana}>{chosen && chosen.reading}</Text>
-        <Text style={styles.meaning}>{chosen && chosen.meaning}</Text>
+        <Text style={styles.kanji}>{result && result.kanji}</Text>
+        <Text style={styles.hiragana}>{result && result.reading}</Text>
+        <Text style={styles.meaning}>{result && result.meaning}</Text>
       </View>
       <ModalScreen />
       <View style={styles.buttons}>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.repeat} onPress={handleRepeat}>
-            <Text style={styles.customBtnText}>Repeat</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.hard} onPress={handleHard}>
-            <Text style={styles.customBtnText}>Hard</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.good} onPress={handleGood}>
-            <Text style={styles.customBtnText}>Good</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.easy} onPress={handleEasy}>
-            <Text style={styles.customBtnText}>Easy</Text>
-          </TouchableOpacity>
-        </View>
+        <AnkiButtons />
       </View>
     </View>
   );
