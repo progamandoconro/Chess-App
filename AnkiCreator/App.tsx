@@ -36,7 +36,7 @@ const App = () => {
     const allKeys = await AsyncStorage.getAllKeys();
     console.log(allKeys);
     const r = Math.floor(Math.random() * allKeys.length);
-
+    random && random.value === String(r) && getRandomKey()
     setRandom({value: allKeys[r], lenght: String(allKeys.length)});
   }
   async function saveValue(key: string, value: string) {
@@ -56,6 +56,7 @@ const App = () => {
     );
     const value = await AsyncStorage.getItem(key);
     setKanjiData(value);
+
   }
   const updateKanji = () => {
     setAnkiButtons(false);
@@ -237,8 +238,12 @@ const App = () => {
       </View>
       <View style={styles.anki}>
         <Text style={styles.kanji}>{result && result.kanji}</Text>
-        <Text style={styles.hiragana}>{result && result.reading}</Text>
-        <Text style={styles.meaning}>{result && result.meaning}</Text>
+        <Text style={styles.hiragana}>
+          {ankiButtons && result && result.reading}
+        </Text>
+        <Text style={styles.meaning}>
+          {ankiButtons && result && result.meaning}
+        </Text>
       </View>
       <ModalScreen />
       <View style={styles.buttons}>
@@ -257,13 +262,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   kanji: {
-    fontSize: 80,
+    fontSize: 120,
   },
   hiragana: {
-    fontSize: 30,
+    fontSize: 50,
   },
   meaning: {
-    fontSize: 10,
+    fontSize: 20,
   },
   buttons: {
     flexDirection: 'row',
