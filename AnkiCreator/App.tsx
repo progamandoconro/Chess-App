@@ -27,66 +27,73 @@ const App = () => {
     lenght: string;
   }
   const [modalVisible, setModalVisible] = useState(false);
-  const [kanjiData, setKanjiData] = useState<string | null>('');
-  const [result, setResult] = useState<Anki>();
   const [random, setRandom] = useState<Random>();
   const [ankiButtons, setAnkiButtons] = useState(false);
+  const [fullData, setFullData] = useState<Anki>({
+    id: '',
+    kanji: '',
+    reading: '',
+    meaning: '',
+    anki: '',
+  });
 
   async function getRandomKey() {
     const allKeys = await AsyncStorage.getAllKeys();
-    console.log(allKeys);
     const r = Math.floor(Math.random() * allKeys.length);
-    random && random.value === String(r) && getRandomKey()
     setRandom({value: allKeys[r], lenght: String(allKeys.length)});
-  }
-  async function saveValue(key: string, value: string) {
-    await AsyncStorage.setItem(key, value);
-  }
-  async function readValue(key: string) {
-    //await AsyncStorage.clear()
-    saveValue(
-      '0',
-      JSON.stringify({
-        id: '0',
-        kanji: '猫',
-        reading: 'ねこ',
-        meaning: 'Gato',
-        anki: '0',
-      }),
-    );
-    const value = await AsyncStorage.getItem(key);
-    setKanjiData(value);
-
   }
   const updateKanji = () => {
     setAnkiButtons(false);
     getRandomKey();
-    random && readValue(random.value);
   };
+  const getAllData = async () => {
+    //await AsyncStorage.clear()
+    const allKeys = await AsyncStorage.getAllKeys();
 
-  useEffect(() => {
-    saveValue(
-      '0',
-      JSON.stringify({
-        id: '0',
-        kanji: '猫',
-        reading: '猫',
-        meaning: 'Gato',
-        anki: '0',
-      }),
-    );
-    random && readValue(random.value);
-  }, []);
+    !allKeys.length && setModalVisible(!modalVisible);
 
-  useEffect(() => {
-    let k: string | null;
-    if (kanjiData) {
-      k = kanjiData;
-      const o = JSON.parse(k);
-      setResult(o);
+    const result: any = {};
+    try {
+      const storage = await AsyncStorage.multiGet(allKeys);
+      storage.map(e => {
+        result[e[0]] = e[1];
+      });
+    } catch (e) {
+      console.log(e);
     }
+
+    for (let i in result) {
+      result[i] = JSON.parse(result[i]);
+    }
+    setFullData(result);
+  };
+  useEffect(() => {
+    getAllData();
     getRandomKey();
-  }, [kanjiData]);
+  }, []);
+  async function saveValue(key: string, value: string) {
+    await AsyncStorage.setItem(key, value);
+    getAllData();
+  }
+
+  const ShowData = () => {
+    try {
+      return (
+        <View style={styles.anki}>
+          <Text style={styles.kanji}>{fullData[random?.value].kanji}</Text>
+          <Text style={styles.hiragana}>
+            {ankiButtons && fullData[random?.value].reading}
+          </Text>
+
+          <Text style={styles.meaning}>
+            {ankiButtons && fullData[random?.value].meaning}
+          </Text>
+        </View>
+      );
+    } catch (e) {
+      return <Text>Add a word to start</Text>;
+    }
+  };
 
   const handleRepeat = () => {
     console.log('Repeat');
@@ -151,11 +158,11 @@ const App = () => {
 
   const ModalScreen = () => {
     const [kanji, setKanji] = useState<Anki>({
-      id: '0',
-      kanji: '猫',
-      reading: 'ねこ',
-      meaning: 'Gato',
-      anki: '100',
+      id: '',
+      kanji: '',
+      reading: '',
+      meaning: '',
+      anki: '',
     });
 
     const handleAddKanji = () => {
@@ -164,7 +171,6 @@ const App = () => {
         saveValue(String(Number(random.lenght) + 1), JSON.stringify(kanji));
 
       setModalVisible(false);
-      readValue('0');
     };
 
     return (
@@ -236,15 +242,7 @@ const App = () => {
           <Text style={styles.customBtnText}>+</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.anki}>
-        <Text style={styles.kanji}>{result && result.kanji}</Text>
-        <Text style={styles.hiragana}>
-          {ankiButtons && result && result.reading}
-        </Text>
-        <Text style={styles.meaning}>
-          {ankiButtons && result && result.meaning}
-        </Text>
-      </View>
+      <ShowData />
       <ModalScreen />
       <View style={styles.buttons}>
         <AnkiButtons />
