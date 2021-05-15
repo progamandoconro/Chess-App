@@ -38,9 +38,14 @@ const App = () => {
   });
 
   async function getRandomKey() {
-    const allKeys = await AsyncStorage.getAllKeys();
-    const r = Math.floor(Math.random() * allKeys.length);
-    setRandom({value: allKeys[r], lenght: String(allKeys.length)});
+    if (!random || modalVisible) {
+      const allKeys = await AsyncStorage.getAllKeys();
+      const r = Math.floor(Math.random() * allKeys.length);
+      setRandom({value: allKeys[r], lenght: String(allKeys.length)});
+    } else {
+      const r = Math.floor(Math.random() * Number(random.lenght));
+      setRandom({...random, value: String(r + 1)});
+    }
   }
   const updateKanji = () => {
     setAnkiButtons(false);
@@ -169,6 +174,7 @@ const App = () => {
       console.log('Add Kanji');
       random &&
         saveValue(String(Number(random.lenght) + 1), JSON.stringify(kanji));
+      getRandomKey();
 
       setModalVisible(false);
     };
