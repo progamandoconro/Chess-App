@@ -85,12 +85,14 @@ const App = () => {
     try {
       return (
         <View style={styles.anki}>
-          <Text style={styles.kanji}>{fullData[random?.value].kanji}</Text>
-          <Text style={styles.hiragana}>
+          <Text numberOfLines={1} adjustsFontSizeToFit style={styles.kanji}>
+            {fullData[random?.value].kanji}
+          </Text>
+          <Text style={styles.hiragana} numberOfLines={1} adjustsFontSizeToFit>
             {ankiButtons && fullData[random?.value].reading}
           </Text>
 
-          <Text style={styles.meaning}>
+          <Text numberOfLines={1} adjustsFontSizeToFit style={styles.meaning}>
             {ankiButtons && fullData[random?.value].meaning}
           </Text>
         </View>
