@@ -10,7 +10,7 @@ import {Text, View} from 'react-native';
 import {reference} from './Storage.tsx';
 
 const App = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({"0":{kanji:"No data"}});
 
   useEffect(() => {
 
