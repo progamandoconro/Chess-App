@@ -5,23 +5,26 @@ yarn add @react-native-firebase/firebase
  */
 
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
+import {reference} from '.Storage';
 
-import {reference} from './Storage.tsx';
-
+interface App {
+  [key: string]: {kanji: string};
+}
 const App = () => {
-  const [data, setData] = useState({"0":{kanji:"No data"}});
-
+  const [data, setData] = useState<App | undefined>({
+    '0': {kanji: 'No data'},
+  });
   useEffect(() => {
-
     reference
       .get()
       .then(doc => {
         if (doc.exists) {
-          setData(doc.data())
+          // typeof doc.data === object
+          setData(doc.data());
           console.log(doc.data());
         } else {
-          // doc.data() will be undefined in this case
+          // typeof doc.data() === undefined
           console.log('No document!');
         }
       })
@@ -29,13 +32,6 @@ const App = () => {
         console.log('Error getting document:', error);
       });
   }, []);
-
-  return (
-    <View>
-      <Text>{data && data["0"].kanji}</Text>
-    </View>
-  );
+  return <Text> {data && data['0'].kanji}</Text>;
 };
-
-
 export default App;
